@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "about": "Tentang",
+    "skills": "Keahlian",
+    "experience": "Pengalaman",
+    "projects": "Proyek",
+    "awards": "Penghargaan",
+    "contact": "Kontak"
+  },
+  "hero": {
+    "greeting": "Hai, saya",
+    "title": "AI Engineer",
+    "subtitle": "Membangun sistem cerdas yang menjembatani riset dan dampak nyata.",
+    "cta_projects": "Lihat Proyek",
+    "cta_cv": "Unduh CV",
+    "study": "S1 Teknik Kecerdasan Artifisial @ ITS Surabaya",
+    "typewords": ["Computer Vision", "NLP & RAG", "Deep Learning", "AI Generatif", "Audio AI"]
+  },
+  "about": {
+    "title": "Tentang Saya",
+    "body": "Saya mahasiswa tahun pertama Teknik Kecerdasan Artifisial di Institut Teknologi Sepuluh Nopember (ITS) Surabaya dengan IPK 3.4/4.0. Saya bekerja di persimpangan riset dan rekayasa — membangun sistem yang menggunakan kecerdasan mesin untuk memecahkan masalah nyata. Dari deteksi TB bio-akustik pemenang penghargaan hingga AI keuangan berbasis WhatsApp untuk UMKM, saya berkembang dalam proyek yang taruhannya nyata.",
+    "education_label": "Pendidikan",
+    "education": "Institut Teknologi Sepuluh Nopember",
+    "degree": "Sarjana Teknik Kecerdasan Artifisial",
+    "period": "Jul 2024 – Sekarang · IPK 3.4/4.0",
+    "location": "Surabaya, Indonesia"
+  },
+  "skills": {
+    "title": "Keahlian Teknis"
+  },
+  "experience": {
+    "title": "Pengalaman",
+    "current": "Aktif",
+    "show_more": "Tampilkan lebih",
+    "show_less": "Tampilkan lebih sedikit"
+  },
+  "projects": {
+    "title": "Proyek",
+    "filter_all": "Semua",
+    "view_github": "GitHub",
+    "view_demo": "Demo",
+    "view_paper": "Paper",
+    "no_link": "Link segera hadir"
+  },
+  "awards": {
+    "title": "Penghargaan"
+  },
+  "contact": {
+    "title": "Mari Terhubung",
+    "subtitle": "Terbuka untuk kolaborasi riset, proyek AI, dan kerja sama freelance.",
+    "email_btn": "Kirim Email",
+    "linkedin_btn": "LinkedIn",
+    "github_btn": "GitHub",
+    "wa_btn": "WhatsApp"
+  },
+  "footer": {
+    "built": "Dibangun dengan React, Vite & Framer Motion",
+    "source": "Lihat Kode"
+  }
+}

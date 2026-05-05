@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "experience": "Experience",
+    "projects": "Projects",
+    "awards": "Awards",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "title": "AI Engineer",
+    "subtitle": "Building intelligent systems that bridge research and real-world impact.",
+    "cta_projects": "View Projects",
+    "cta_cv": "Download CV",
+    "study": "BSc AI Engineering @ ITS Surabaya",
+    "typewords": ["Computer Vision", "NLP & RAG", "Deep Learning", "Generative AI", "Audio AI"]
+  },
+  "about": {
+    "title": "About Me",
+    "body": "I'm a first-year AI Engineering student at Institut Teknologi Sepuluh Nopember (ITS) Surabaya with a GPA of 3.4/4.0. I work at the intersection of research and engineering — building systems that use machine intelligence to solve real problems. From award-winning bio-acoustic TB detection to WhatsApp-based financial AI for SMEs, I thrive on projects where the stakes are real.",
+    "education_label": "Education",
+    "education": "Institut Teknologi Sepuluh Nopember",
+    "degree": "Bachelor of Science in Artificial Intelligence Engineering",
+    "period": "Jul 2024 – Present · GPA 3.4/4.0",
+    "location": "Surabaya, Indonesia"
+  },
+  "skills": {
+    "title": "Technical Skills"
+  },
+  "experience": {
+    "title": "Experience",
+    "current": "Current",
+    "show_more": "Show more",
+    "show_less": "Show less"
+  },
+  "projects": {
+    "title": "Projects",
+    "filter_all": "All",
+    "view_github": "GitHub",
+    "view_demo": "Demo",
+    "view_paper": "Paper",
+    "no_link": "Links coming soon"
+  },
+  "awards": {
+    "title": "Honors & Awards"
+  },
+  "contact": {
+    "title": "Let's Connect",
+    "subtitle": "Open to research collaborations, AI projects, and freelance engagements.",
+    "email_btn": "Send Email",
+    "linkedin_btn": "LinkedIn",
+    "github_btn": "GitHub",
+    "wa_btn": "WhatsApp"
+  },
+  "footer": {
+    "built": "Built with React, Vite & Framer Motion",
+    "source": "View Source"
+  }
+}
