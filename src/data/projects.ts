@@ -25,8 +25,8 @@ export const projects: ProjectItem[] = [
     links: { github: 'https://github.com/eycoo/TB-model-v2' },
   },
   {
-    id: 'chat-to-core',
-    title: 'Chat to Core',
+    id: 'finvibe',
+    title: 'FinVibe',
     year: 2026,
     tags: ['NLP', 'Computer Vision', 'RAG', 'System Design', 'WhatsApp'],
     bullets: [
@@ -39,7 +39,7 @@ export const projects: ProjectItem[] = [
         id: 'Merancang arsitektur microservice yang mengintegrasikan IndoBERT untuk NER, Whisper untuk ASR, YOLOv8 Nano dan PaddleOCR untuk parsing struk, serta Phi 3 Mini dengan pgvector untuk retrieval augmented generation.',
       },
     ],
-    image: '/portfolio/images/projects/chat-to-core.jpg',
+    image: '/portfolio/images/projects/finvibe.jpg',
     links: { github: 'https://github.com/eycoo/FinVibe-prototype' },
   },
   {
