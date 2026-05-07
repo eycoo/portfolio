@@ -5,10 +5,10 @@ import SectionTitle from '../components/ui/SectionTitle'
 import { awards } from '../data/awards'
 
 const medalConfig = {
-  gold: { emoji: '🥇', color: '#FFD93D', bg: '#FFD93D15' },
-  silver: { emoji: '🥈', color: '#B0B0B0', bg: '#B0B0B015' },
-  bronze: { emoji: '🥉', color: '#CD7F32', bg: '#CD7F3215' },
-  special: { emoji: '⭐', color: '#4D96FF', bg: '#4D96FF15' },
+  gold:    { emoji: '🥇', color: '#D97706', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.2)' },
+  silver:  { emoji: '🥈', color: '#64748B', bg: 'rgba(100,116,139,0.08)', border: 'rgba(100,116,139,0.2)' },
+  bronze:  { emoji: '🥉', color: '#92400E', bg: 'rgba(146,64,14,0.08)', border: 'rgba(146,64,14,0.2)' },
+  special: { emoji: '⭐', color: '#6366F1', bg: 'rgba(99,102,241,0.08)', border: 'rgba(99,102,241,0.2)' },
 }
 
 export default function Awards() {
@@ -20,7 +20,7 @@ export default function Awards() {
       <div className="max-w-5xl mx-auto">
         <SectionTitle title={t('awards.title')} />
 
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 gap-5">
           {awards.map((award, i) => {
             const cfg = medalConfig[award.medal]
             return (
@@ -28,18 +28,16 @@ export default function Awards() {
                 <motion.div
                   whileHover={{ scale: 1.03, y: -4 }}
                   transition={{ type: 'spring', stiffness: 300 }}
-                  className="rounded-2xl border border-ink/8 bg-white p-6 flex items-start gap-5"
+                  className="rounded-2xl bg-white p-6 flex items-start gap-5"
+                  style={{ border: `1px solid ${cfg.border}`, background: cfg.bg, boxShadow: '0 1px 3px rgba(15,23,42,0.05)' }}
                 >
-                  <div className="text-4xl shrink-0">{cfg.emoji}</div>
+                  <div className="text-4xl shrink-0 select-none">{cfg.emoji}</div>
                   <div>
-                    <p
-                      className="font-heading font-bold text-xl"
-                      style={{ color: cfg.color }}
-                    >
+                    <p className="font-heading font-bold text-xl" style={{ color: cfg.color }}>
                       {award.title[lang]}
                     </p>
-                    <p className="text-ink font-medium mt-1">{award.event}</p>
-                    <p className="text-sm text-ink-muted font-mono mt-1">{award.year}</p>
+                    <p className="font-medium mt-1 text-ink">{award.event}</p>
+                    <p className="text-sm font-mono mt-1" style={{ color: '#94A3B8' }}>{award.year}</p>
                   </div>
                 </motion.div>
               </Reveal>

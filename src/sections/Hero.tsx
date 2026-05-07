@@ -1,60 +1,190 @@
 import { useTranslation } from 'react-i18next'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { motion, AnimatePresence, useAnimationFrame } from 'framer-motion'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import { Download, ArrowDown } from 'lucide-react'
 import MagneticButton from '../components/ui/MagneticButton'
 
-function NeuralNet() {
-  const nodes = [
-    { cx: 80, cy: 120 }, { cx: 80, cy: 200 }, { cx: 80, cy: 280 },
-    { cx: 200, cy: 80 }, { cx: 200, cy: 160 }, { cx: 200, cy: 240 }, { cx: 200, cy: 320 },
-    { cx: 320, cy: 120 }, { cx: 320, cy: 200 }, { cx: 320, cy: 280 },
-    { cx: 440, cy: 160 }, { cx: 440, cy: 240 },
-    { cx: 540, cy: 200 },
-  ]
-  const edges = [
-    [0,3],[0,4],[0,5],[1,3],[1,4],[1,5],[1,6],[2,4],[2,5],[2,6],
-    [3,7],[3,8],[4,7],[4,8],[4,9],[5,8],[5,9],[6,8],[6,9],
-    [7,10],[7,11],[8,10],[8,11],[9,10],[9,11],
-    [10,12],[11,12],
-  ]
+// ─── Interactive Neural Net ────────────────────────────────────────────────
+const BASE_NODES = [
+  { cx: 80,  cy: 120 }, { cx: 80,  cy: 200 }, { cx: 80,  cy: 280 },
+  { cx: 200, cy: 80  }, { cx: 200, cy: 160 }, { cx: 200, cy: 240 }, { cx: 200, cy: 320 },
+  { cx: 320, cy: 120 }, { cx: 320, cy: 200 }, { cx: 320, cy: 280 },
+  { cx: 440, cy: 160 }, { cx: 440, cy: 240 },
+  { cx: 540, cy: 200 },
+]
+
+const EDGES = [
+  [0,3],[0,4],[0,5],[1,3],[1,4],[1,5],[1,6],[2,4],[2,5],[2,6],
+  [3,7],[3,8],[4,7],[4,8],[4,9],[5,8],[5,9],[6,8],[6,9],
+  [7,10],[7,11],[8,10],[8,11],[9,10],[9,11],
+  [10,12],[11,12],
+]
+
+const NODE_COLORS = ['#6366F1','#8B5CF6','#EC4899','#06B6D4','#F59E0B']
+const REPEL_RADIUS = 100
+const REPEL_STRENGTH = 60
+const RETURN_SPEED = 0.08
+
+function InteractiveNeuralNet() {
+  const svgRef = useRef<SVGSVGElement>(null)
+  const mouseRef = useRef<{ x: number; y: number } | null>(null)
+  const posRef = useRef(BASE_NODES.map(n => ({ x: n.cx, y: n.cy })))
+  const [positions, setPositions] = useState(BASE_NODES.map(n => ({ x: n.cx, y: n.cy })))
+  const [hoveredNode, setHoveredNode] = useState<number | null>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => { setMounted(true) }, [])
+
+  const toSVGCoords = useCallback((clientX: number, clientY: number) => {
+    const svg = svgRef.current
+    if (!svg) return null
+    const rect = svg.getBoundingClientRect()
+    const vb = svg.viewBox.baseVal
+    return {
+      x: ((clientX - rect.left) / rect.width) * vb.width,
+      y: ((clientY - rect.top) / rect.height) * vb.height,
+    }
+  }, [])
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      mouseRef.current = toSVGCoords(e.clientX, e.clientY)
+    }
+    const onLeave = () => { mouseRef.current = null }
+    const svg = svgRef.current
+    svg?.addEventListener('mousemove', onMove)
+    svg?.addEventListener('mouseleave', onLeave)
+    return () => {
+      svg?.removeEventListener('mousemove', onMove)
+      svg?.removeEventListener('mouseleave', onLeave)
+    }
+  }, [toSVGCoords])
+
+  // Touch support
+  useEffect(() => {
+    const onTouch = (e: TouchEvent) => {
+      const t = e.touches[0]
+      mouseRef.current = toSVGCoords(t.clientX, t.clientY)
+    }
+    const svg = svgRef.current
+    svg?.addEventListener('touchmove', onTouch, { passive: true })
+    svg?.addEventListener('touchend', () => { mouseRef.current = null })
+    return () => {
+      svg?.removeEventListener('touchmove', onTouch)
+    }
+  }, [toSVGCoords])
+
+  useAnimationFrame(() => {
+    const mouse = mouseRef.current
+    let changed = false
+    const next = posRef.current.map((pos, i) => {
+      const base = BASE_NODES[i]
+      let tx = pos.x, ty = pos.y
+
+      if (mouse) {
+        const dx = pos.x - mouse.x
+        const dy = pos.y - mouse.y
+        const dist = Math.sqrt(dx * dx + dy * dy)
+        if (dist < REPEL_RADIUS && dist > 0) {
+          const force = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH
+          tx = pos.x + (dx / dist) * force
+          ty = pos.y + (dy / dist) * force
+        }
+      }
+
+      // Spring return to base
+      const nx = pos.x + (tx - pos.x) * (mouse ? 1 : RETURN_SPEED) + (base.cx - pos.x) * RETURN_SPEED
+      const ny = pos.y + (ty - pos.y) * (mouse ? 1 : RETURN_SPEED) + (base.cy - pos.y) * RETURN_SPEED
+
+      if (Math.abs(nx - pos.x) > 0.05 || Math.abs(ny - pos.y) > 0.05) changed = true
+      return { x: nx, y: ny }
+    })
+
+    posRef.current = next
+    if (changed) setPositions([...next])
+  })
+
+  const getEdgeOpacity = (a: number, b: number) => {
+    if (hoveredNode === null) return 0.55
+    return a === hoveredNode || b === hoveredNode ? 1 : 0.15
+  }
+
+  const getEdgeWidth = (a: number, b: number) => {
+    return (a === hoveredNode || b === hoveredNode) ? 2.5 : 1.5
+  }
 
   return (
-    <svg viewBox="0 0 620 400" className="w-full h-full opacity-30" aria-hidden>
+    <svg
+      ref={svgRef}
+      viewBox="0 0 620 400"
+      className="w-full h-full cursor-crosshair"
+      style={{ opacity: mounted ? 1 : 0, transition: 'opacity 0.8s' }}
+    >
       <defs>
         <linearGradient id="edge-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#FF6B6B" stopOpacity="0.6" />
-          <stop offset="50%" stopColor="#4D96FF" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#6BCB77" stopOpacity="0.6" />
+          <stop offset="0%"   stopColor="#6366F1" stopOpacity="0.7" />
+          <stop offset="50%"  stopColor="#8B5CF6" stopOpacity="1"   />
+          <stop offset="100%" stopColor="#EC4899" stopOpacity="0.7" />
         </linearGradient>
+        {BASE_NODES.map((_, i) => (
+          <radialGradient key={i} id={`glow-${i}`} cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stopColor={NODE_COLORS[i % NODE_COLORS.length]} stopOpacity="0.6" />
+            <stop offset="100%" stopColor={NODE_COLORS[i % NODE_COLORS.length]} stopOpacity="0"   />
+          </radialGradient>
+        ))}
       </defs>
-      {edges.map(([a, b], i) => (
-        <motion.line
+
+      {/* Edges */}
+      {EDGES.map(([a, b], i) => (
+        <line
           key={i}
-          x1={nodes[a].cx} y1={nodes[a].cy}
-          x2={nodes[b].cx} y2={nodes[b].cy}
+          x1={positions[a].x} y1={positions[a].y}
+          x2={positions[b].x} y2={positions[b].y}
           stroke="url(#edge-grad)"
-          strokeWidth="1.5"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 1.2, delay: i * 0.04, ease: 'easeOut' }}
+          strokeWidth={getEdgeWidth(a, b)}
+          opacity={getEdgeOpacity(a, b)}
+          style={{ transition: 'opacity 0.2s, stroke-width 0.2s' }}
         />
       ))}
-      {nodes.map((n, i) => (
-        <motion.circle
-          key={i}
-          cx={n.cx} cy={n.cy} r="6"
-          fill={['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#C77DFF'][i % 5]}
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 + i * 0.06, ease: 'backOut' }}
-        />
-      ))}
+
+      {/* Nodes */}
+      {positions.map((pos, i) => {
+        const color = NODE_COLORS[i % NODE_COLORS.length]
+        const isHovered = hoveredNode === i
+        return (
+          <g key={i}>
+            {/* Glow ring */}
+            <circle
+              cx={pos.x} cy={pos.y}
+              r={isHovered ? 22 : 14}
+              fill={`url(#glow-${i})`}
+              style={{ transition: 'r 0.25s' }}
+              pointerEvents="none"
+            />
+            {/* Node body */}
+            <circle
+              cx={pos.x} cy={pos.y}
+              r={isHovered ? 9 : 6}
+              fill={color}
+              stroke="#fff"
+              strokeWidth={isHovered ? 2.5 : 1.5}
+              style={{
+                transition: 'r 0.2s, filter 0.2s',
+                filter: isHovered ? `drop-shadow(0 0 8px ${color})` : 'none',
+                cursor: 'pointer',
+              }}
+              onMouseEnter={() => setHoveredNode(i)}
+              onMouseLeave={() => setHoveredNode(null)}
+            />
+          </g>
+        )
+      })}
     </svg>
   )
 }
 
+// ─── Typewriter ────────────────────────────────────────────────────────────
 function TypewriterWords({ words }: { words: string[] }) {
   const [idx, setIdx] = useState(0)
 
@@ -81,53 +211,48 @@ function TypewriterWords({ words }: { words: string[] }) {
   )
 }
 
+// ─── Hero ──────────────────────────────────────────────────────────────────
 export default function Hero() {
   const { t } = useTranslation()
   const words: string[] = t('hero.typewords', { returnObjects: true }) as string[]
 
   return (
-    <section id="hero" className="min-h-screen flex items-center relative overflow-hidden pt-20">
-      {/* Background decoration */}
+    <section id="hero" className="min-h-screen flex items-center relative overflow-hidden pt-24">
       <div className="absolute inset-0 grain pointer-events-none" />
-      <div className="absolute top-0 right-0 w-1/2 h-full opacity-60 hidden lg:block">
-        <NeuralNet />
-      </div>
-      <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-rose/10 blur-3xl" />
-      <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-blue/10 blur-3xl" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
+      {/* Background blobs */}
+      <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full blur-3xl pointer-events-none"
+        style={{ background: 'rgba(99,102,241,0.12)' }} />
+      <div className="absolute top-1/3 -right-20 w-80 h-80 rounded-full blur-3xl pointer-events-none"
+        style={{ background: 'rgba(139,92,246,0.10)' }} />
+      <div className="absolute bottom-10 left-1/3 w-64 h-64 rounded-full blur-3xl pointer-events-none"
+        style={{ background: 'rgba(236,72,153,0.07)' }} />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center w-full">
+        {/* Left — text */}
         <div>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-ink-muted font-medium mb-3"
-          >
-            {t('hero.greeting')}
-          </motion.p>
-
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold font-heading text-ink mb-2"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold font-heading text-ink mb-2 leading-tight"
           >
-            Ahmad Naufal
-            <br />
-            <span className="gradient-text">Farras</span>
+            {t('hero.greeting')}{' '}
+            <span className="gradient-text">Ahmad Naufal Farras</span>
           </motion.h1>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-2xl md:text-3xl font-heading text-ink/70 mb-2"
+            transition={{ delay: 0.35 }}
+            className="text-2xl md:text-3xl font-heading mt-3 mb-2"
+            style={{ color: '#64748B' }}
           >
             <TypewriterWords words={words} />
           </motion.div>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
             className="text-ink-muted text-lg mt-4 max-w-md leading-relaxed"
@@ -135,20 +260,11 @@ export default function Hero() {
             {t('hero.subtitle')}
           </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="text-sm text-ink-muted mt-2 font-mono"
-          >
-            🎓 {t('hero.study')}
-          </motion.p>
-
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="flex flex-wrap gap-4 mt-8"
+            className="flex flex-wrap gap-3 mt-8"
           >
             <MagneticButton
               href="#projects"
@@ -156,7 +272,8 @@ export default function Hero() {
                 e.preventDefault()
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white font-medium text-sm hover:bg-ink/90 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all"
+              style={{ background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', color: '#fff', boxShadow: '0 4px 24px rgba(99,102,241,0.35)' }}
             >
               {t('hero.cta_projects')}
               <ArrowDown size={16} />
@@ -166,7 +283,8 @@ export default function Hero() {
               href="/portfolio/cv/Ahmad_Naufal_Farras_CV.pdf"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-ink/20 text-ink font-medium text-sm hover:border-blue hover:text-blue transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border font-semibold text-sm transition-all"
+              style={{ borderColor: 'rgba(99,102,241,0.35)', color: '#6366F1', background: 'rgba(99,102,241,0.05)' }}
             >
               <Download size={16} />
               {t('hero.cta_cv')}
@@ -177,26 +295,32 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
-            className="flex items-center gap-4 mt-6"
+            className="flex items-center gap-4 mt-7"
           >
-            <a href="https://github.com/eycoo" target="_blank" rel="noreferrer" className="text-ink-muted hover:text-ink transition-colors">
+            <a href="https://github.com/eycoo" target="_blank" rel="noreferrer"
+              className="transition-colors" style={{ color: '#94A3B8' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#0F172A')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#94A3B8')}>
               <FaGithub size={22} />
             </a>
-            <a href="https://www.linkedin.com/in/ahmad-naufal-farras-182327340/" target="_blank" rel="noreferrer" className="text-ink-muted hover:text-blue transition-colors">
+            <a href="https://www.linkedin.com/in/ahmad-naufal-farras-182327340/" target="_blank" rel="noreferrer"
+              className="transition-colors" style={{ color: '#94A3B8' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#6366F1')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#94A3B8')}>
               <FaLinkedin size={22} />
             </a>
-            <span className="text-ink-muted text-sm font-mono">ahmadnaufalfarras@gmail.com</span>
+            <span className="text-sm font-mono" style={{ color: '#94A3B8' }}>ahmadnaufalfarras@gmail.com</span>
           </motion.div>
         </div>
 
-        {/* Mobile neural net */}
+        {/* Right — Interactive neural net */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="lg:hidden h-48"
+          transition={{ delay: 0.4, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="h-72 lg:h-full min-h-[380px]"
         >
-          <NeuralNet />
+          <InteractiveNeuralNet />
         </motion.div>
       </div>
 
@@ -205,13 +329,11 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-ink-muted"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        style={{ color: '#94A3B8' }}
       >
         <span className="text-xs font-mono">scroll</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.4 }}
-        >
+        <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.4 }}>
           <ArrowDown size={16} />
         </motion.div>
       </motion.div>

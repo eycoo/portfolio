@@ -10,7 +10,7 @@
   "hero": {
     "greeting": "Hi, I'm",
     "title": "AI Engineer",
-    "subtitle": "Building intelligent systems that bridge research and real-world impact.",
+    "subtitle": "Building intelligent systems that bridge research and real world impact.",
     "cta_projects": "View Projects",
     "cta_cv": "Download CV",
     "study": "BSc AI Engineering @ ITS Surabaya",
@@ -18,11 +18,11 @@
   },
   "about": {
     "title": "About Me",
-    "body": "I'm a first-year AI Engineering student at Institut Teknologi Sepuluh Nopember (ITS) Surabaya with a GPA of 3.4/4.0. I work at the intersection of research and engineering — building systems that use machine intelligence to solve real problems. From award-winning bio-acoustic TB detection to WhatsApp-based financial AI for SMEs, I thrive on projects where the stakes are real.",
+    "body": "Artificial Intelligence Engineering Student at ITS focused on Applied Deep Learning. Gold Medalist at Gemastik XVIII and 1st Place Winner at BRIN AIDeaNation. Specialization in Audio and Image Processing, ranging from deploying bio acoustic models for healthcare to researching synthetic data with Stable Diffusion. Passionate about solving high stakes problems through AI engineering.",
     "education_label": "Education",
     "education": "Institut Teknologi Sepuluh Nopember",
     "degree": "Bachelor of Science in Artificial Intelligence Engineering",
-    "period": "Jul 2024 – Present · GPA 3.4/4.0",
+    "period": "Jul 2024 to Present · GPA 3.4/4.0",
     "location": "Surabaya, Indonesia"
   },
   "skills": {

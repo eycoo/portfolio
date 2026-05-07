@@ -4,13 +4,15 @@ import { useRef } from 'react'
 interface MagneticButtonProps {
   children: React.ReactNode
   className?: string
+  style?: React.CSSProperties
   onClick?: (e: React.MouseEvent) => void
   href?: string
   target?: string
   rel?: string
+  [key: string]: unknown
 }
 
-export default function MagneticButton({ children, className, onClick, href, target, rel }: MagneticButtonProps) {
+export default function MagneticButton({ children, className, style, onClick, href, target, rel }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -45,6 +47,7 @@ export default function MagneticButton({ children, className, onClick, href, tar
         rel={rel}
         onClick={onClick}
         className={className}
+        style={style}
       >
         {children}
       </Tag>

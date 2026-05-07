@@ -18,11 +18,11 @@
   },
   "about": {
     "title": "Tentang Saya",
-    "body": "Saya mahasiswa tahun pertama Teknik Kecerdasan Artifisial di Institut Teknologi Sepuluh Nopember (ITS) Surabaya dengan IPK 3.4/4.0. Saya bekerja di persimpangan riset dan rekayasa — membangun sistem yang menggunakan kecerdasan mesin untuk memecahkan masalah nyata. Dari deteksi TB bio-akustik pemenang penghargaan hingga AI keuangan berbasis WhatsApp untuk UMKM, saya berkembang dalam proyek yang taruhannya nyata.",
+    "body": "Mahasiswa Teknik Kecerdasan Artifisial di ITS dengan fokus pada Applied Deep Learning. Peraih Medali Emas Gemastik XVIII dan Juara 1 BRIN AIDeaNation. Spesialisasi di Audio dan Image Processing, mulai dari deployment model bio akustik untuk kesehatan hingga riset synthetic data dengan Stable Diffusion. Passionate dalam memecahkan masalah berdampak tinggi lewat rekayasa AI.",
     "education_label": "Pendidikan",
     "education": "Institut Teknologi Sepuluh Nopember",
     "degree": "Sarjana Teknik Kecerdasan Artifisial",
-    "period": "Jul 2024 – Sekarang · IPK 3.4/4.0",
+    "period": "Jul 2024 sampai Sekarang · IPK 3.4/4.0",
     "location": "Surabaya, Indonesia"
   },
   "skills": {

@@ -22,7 +22,7 @@ export default function SpotlightCursor() {
       className="pointer-events-none fixed z-0 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full"
       aria-hidden
     >
-      <div className="w-full h-full rounded-full bg-radial from-blue/10 via-transparent to-transparent" />
+      <div className="w-full h-full rounded-full" style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.10) 0%, rgba(139,92,246,0.04) 50%, transparent 70%)' }} />
     </motion.div>
   )
 }

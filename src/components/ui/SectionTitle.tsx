@@ -13,7 +13,7 @@ export default function SectionTitle({ title, accent }: SectionTitleProps) {
           {title}
           {accent && <span className="gradient-text"> {accent}</span>}
         </h2>
-        <div className="mt-4 mx-auto w-16 h-1 rounded-full bg-linear-to-r from-rose via-yellow to-blue" />
+        <div className="mt-4 mx-auto w-16 h-1 rounded-full" style={{ background: 'linear-gradient(to right, #6366F1, #8B5CF6, #EC4899)' }} />
       </div>
     </Reveal>
   )

@@ -12,7 +12,7 @@ const contactLinks = [
     href: 'mailto:ahmadnaufalfarras@gmail.com',
     label: 'email_btn',
     value: 'ahmadnaufalfarras@gmail.com',
-    color: '#FF6B6B',
+    color: '#6366F1',
   },
   {
     key: 'linkedin',
@@ -20,7 +20,7 @@ const contactLinks = [
     href: 'https://www.linkedin.com/in/ahmad-naufal-farras-182327340/',
     label: 'linkedin_btn',
     value: 'ahmad-naufal-farras',
-    color: '#4D96FF',
+    color: '#0A66C2',
   },
   {
     key: 'github',
@@ -28,7 +28,7 @@ const contactLinks = [
     href: 'https://github.com/eycoo',
     label: 'github_btn',
     value: 'github.com/eycoo',
-    color: '#1A1A1A',
+    color: '#0F172A',
   },
   {
     key: 'wa',
@@ -36,7 +36,7 @@ const contactLinks = [
     href: 'https://wa.me/6281331383599',
     label: 'wa_btn',
     value: '+62 813-3138-3599',
-    color: '#6BCB77',
+    color: '#25D366',
   },
 ]
 
@@ -44,12 +44,12 @@ export default function Contact() {
   const { t } = useTranslation()
 
   return (
-    <section id="contact" className="py-28 px-6 bg-base-100">
+    <section id="contact" className="py-28 px-6" style={{ background: '#EEF2FF' }}>
       <div className="max-w-3xl mx-auto text-center">
         <SectionTitle title={t('contact.title')} />
 
         <Reveal delay={0.1}>
-          <p className="text-ink-muted text-lg mb-12">{t('contact.subtitle')}</p>
+          <p className="text-lg mb-12" style={{ color: '#64748B' }}>{t('contact.subtitle')}</p>
         </Reveal>
 
         <div className="grid sm:grid-cols-2 gap-4">
@@ -62,17 +62,20 @@ export default function Contact() {
                 whileHover={{ scale: 1.04, y: -4 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 300 }}
-                className="flex items-center gap-4 bg-white rounded-2xl border border-ink/8 p-5 text-left hover:shadow-lg transition-shadow group"
+                className="flex items-center gap-4 bg-white rounded-2xl p-5 text-left group"
+                style={{ border: '1px solid rgba(15,23,42,0.07)', boxShadow: '0 1px 3px rgba(15,23,42,0.05)' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 32px ${link.color}20` }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 1px 3px rgba(15,23,42,0.05)' }}
               >
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110"
-                  style={{ background: link.color + '18', color: link.color }}
+                  className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110"
+                  style={{ background: link.color + '15', color: link.color }}
                 >
                   {link.icon}
                 </div>
                 <div>
                   <p className="font-heading font-semibold text-ink text-sm">{t(`contact.${link.label}`)}</p>
-                  <p className="text-xs text-ink-muted font-mono mt-0.5">{link.value}</p>
+                  <p className="text-xs font-mono mt-0.5" style={{ color: '#94A3B8' }}>{link.value}</p>
                 </div>
               </motion.a>
             </Reveal>
