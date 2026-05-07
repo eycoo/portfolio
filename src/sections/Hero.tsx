@@ -280,7 +280,7 @@ export default function Hero() {
             </MagneticButton>
 
             <MagneticButton
-              href="/portfolio/cv/Ahmad_Naufal_Farras_CV.pdf"
+              href="/portfolio/cv/CV_Ahmad_Naufal_Farras_5054241038.pdf"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border font-semibold text-sm transition-all"
