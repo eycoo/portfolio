@@ -33,6 +33,7 @@ export interface AwardItem {
   title: Bilingual
   event: string
   year: number
+  image?: string
 }
 
 export interface SkillCategory {

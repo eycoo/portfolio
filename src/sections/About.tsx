@@ -12,23 +12,39 @@ export default function About() {
         <SectionTitle title={t('about.title')} />
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* Left — photo + bio */}
           <Reveal delay={0.1}>
-            <p className="text-lg leading-relaxed" style={{ color: '#525252' }}>
-              {t('about.body')}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {['AI Research', 'Computer Vision', 'NLP', 'RAG', 'SNN', 'PyTorch'].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 text-sm font-mono rounded-full"
-                  style={{ background: '#FFFFFF', border: '1px solid #E5E5E5', color: '#525252' }}
-                >
-                  {tag}
-                </span>
-              ))}
+            <div className="flex flex-col sm:flex-row md:flex-col gap-6 items-start">
+              {/* Profile photo */}
+              <div className="shrink-0">
+                <img
+                  src="/portfolio/images/profile/farras.jpg"
+                  alt="Ahmad Naufal Farras"
+                  className="w-28 h-28 rounded-2xl object-cover"
+                  style={{ border: '1px solid #E5E5E5' }}
+                />
+              </div>
+
+              <div>
+                <p className="text-lg leading-relaxed" style={{ color: '#525252' }}>
+                  {t('about.body')}
+                </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {['AI Research', 'Computer Vision', 'NLP', 'RAG', 'SNN', 'PyTorch'].map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 text-sm font-mono rounded-full"
+                      style={{ background: '#FFFFFF', border: '1px solid #E5E5E5', color: '#525252' }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </Reveal>
 
+          {/* Right — education card */}
           <Reveal delay={0.2}>
             <div className="gradient-border rounded-2xl p-px">
               <div className="rounded-2xl bg-white p-6 space-y-4">

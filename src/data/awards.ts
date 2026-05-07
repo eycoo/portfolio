@@ -6,6 +6,7 @@ export const awards: AwardItem[] = [
     title: { en: 'Gold Medal', id: 'Medali Emas' },
     event: 'Software Development Division – Gemastik XVIII',
     year: 2025,
+    image: '/portfolio/images/awards/sertif_gemas.jpg',
   },
   {
     medal: 'gold',
