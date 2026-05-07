@@ -9,7 +9,7 @@ export const awards: AwardItem[] = [
   },
   {
     medal: 'gold',
-    title: { en: '1st Winner', id: 'Juara 1' },
+    title: { en: '1st Place', id: 'Juara 1' },
     event: 'BRIN AIDeaNation',
     year: 2025,
   },
