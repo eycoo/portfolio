@@ -67,10 +67,12 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <button
             onClick={toggleLang}
-            className="text-sm font-mono font-medium px-3 py-1.5 rounded-full transition-all cursor-pointer"
-            style={{ border: '1px solid #D4D4D8', color: '#525252', background: '#FAFAFA' }}
+            className="text-sm font-medium transition-all cursor-pointer"
+            style={{ color: '#737373', background: 'transparent', padding: '0' }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#0A0A0A')}
+            onMouseLeave={e => (e.currentTarget.style.color = '#737373')}
           >
-            {i18n.language === 'en' ? '🇮🇩 ID' : '🇬🇧 EN'}
+            {i18n.language === 'en' ? 'ID' : 'EN'}
           </button>
           <button
             className="md:hidden p-1.5 rounded-lg cursor-pointer"
