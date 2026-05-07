@@ -22,7 +22,7 @@ export const projects: ProjectItem[] = [
       },
     ],
     image: '/portfolio/images/projects/tb-cough.jpg',
-    links: { github: 'https://github.com/eycoo/TB-model-v2' },
+    links: { github: 'https://github.com/eycoo/TB-Cough-Detection-Model' },
   },
   {
     id: 'finvibe',
