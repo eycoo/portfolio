@@ -16,13 +16,10 @@ export default function Skills() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {skillCategories.map((cat, ci) => (
             <Reveal key={cat.name.en} delay={ci * 0.08}>
-              <div
-                className="rounded-2xl bg-white border p-6 h-full"
-                style={{ borderColor: 'rgba(15,23,42,0.07)', boxShadow: '0 1px 3px rgba(15,23,42,0.04)' }}
-              >
+              <div className="rounded-2xl bg-white border p-6 h-full" style={{ borderColor: '#E5E5E5' }}>
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: cat.color }} />
-                  <h3 className="font-heading font-semibold text-xs uppercase tracking-widest" style={{ color: '#94A3B8' }}>
+                  <div className="w-2 h-2 rounded-full" style={{ background: cat.color }} />
+                  <h3 className="font-heading font-semibold text-xs uppercase tracking-widest" style={{ color: '#A3A3A3' }}>
                     {cat.name[lang]}
                   </h3>
                 </div>
@@ -34,12 +31,11 @@ export default function Skills() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: ci * 0.04 + si * 0.025, ease: 'backOut' }}
-                      whileHover={{ scale: 1.07, y: -2 }}
+                      whileHover={{ scale: 1.06, y: -2 }}
                       className="px-3 py-1.5 text-sm font-mono rounded-lg"
                       style={{
-                        borderColor: cat.color + '35',
-                        border: `1px solid ${cat.color}35`,
-                        background: cat.color + '0D',
+                        background: '#F5F5F5',
+                        border: '1px solid #E5E5E5',
                         color: cat.color,
                       }}
                     >

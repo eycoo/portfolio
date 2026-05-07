@@ -21,7 +21,7 @@ const EDGES = [
   [10,12],[11,12],
 ]
 
-const NODE_COLORS = ['#6366F1','#8B5CF6','#EC4899','#06B6D4','#F59E0B']
+const NODE_COLORS = ['#0A0A0A','#262626','#525252','#737373','#A3A3A3']
 const REPEL_RADIUS = 100
 const REPEL_STRENGTH = 60
 const RETURN_SPEED = 0.08
@@ -123,9 +123,9 @@ function InteractiveNeuralNet() {
     >
       <defs>
         <linearGradient id="edge-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%"   stopColor="#6366F1" stopOpacity="0.7" />
-          <stop offset="50%"  stopColor="#8B5CF6" stopOpacity="1"   />
-          <stop offset="100%" stopColor="#EC4899" stopOpacity="0.7" />
+          <stop offset="0%"   stopColor="#0A0A0A" stopOpacity="0.5" />
+          <stop offset="50%"  stopColor="#525252" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#A3A3A3" stopOpacity="0.4" />
         </linearGradient>
         {BASE_NODES.map((_, i) => (
           <radialGradient key={i} id={`glow-${i}`} cx="50%" cy="50%" r="50%">
@@ -222,11 +222,11 @@ export default function Hero() {
 
       {/* Background blobs */}
       <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full blur-3xl pointer-events-none"
-        style={{ background: 'rgba(99,102,241,0.12)' }} />
+        style={{ background: 'rgba(0,0,0,0.04)' }} />
       <div className="absolute top-1/3 -right-20 w-80 h-80 rounded-full blur-3xl pointer-events-none"
-        style={{ background: 'rgba(139,92,246,0.10)' }} />
+        style={{ background: 'rgba(0,0,0,0.03)' }} />
       <div className="absolute bottom-10 left-1/3 w-64 h-64 rounded-full blur-3xl pointer-events-none"
-        style={{ background: 'rgba(236,72,153,0.07)' }} />
+        style={{ background: 'rgba(0,0,0,0.02)' }} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center w-full">
         {/* Left — text */}
@@ -246,7 +246,7 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.35 }}
             className="text-2xl md:text-3xl font-heading mt-3 mb-2"
-            style={{ color: '#64748B' }}
+            style={{ color: '#737373' }}
           >
             <TypewriterWords words={words} />
           </motion.div>
@@ -273,7 +273,7 @@ export default function Hero() {
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
               }}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all"
-              style={{ background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', color: '#fff', boxShadow: '0 4px 24px rgba(99,102,241,0.35)' }}
+              style={{ background: '#0A0A0A', color: '#FFFFFF', boxShadow: '0 4px 20px rgba(0,0,0,0.18)' }}
             >
               {t('hero.cta_projects')}
               <ArrowDown size={16} />
@@ -284,7 +284,7 @@ export default function Hero() {
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border font-semibold text-sm transition-all"
-              style={{ borderColor: 'rgba(99,102,241,0.35)', color: '#6366F1', background: 'rgba(99,102,241,0.05)' }}
+              style={{ borderColor: '#D4D4D8', color: '#525252', background: '#FAFAFA' }}
             >
               <Download size={16} />
               {t('hero.cta_cv')}
@@ -298,18 +298,18 @@ export default function Hero() {
             className="flex items-center gap-4 mt-7"
           >
             <a href="https://github.com/eycoo" target="_blank" rel="noreferrer"
-              className="transition-colors" style={{ color: '#94A3B8' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#0F172A')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#94A3B8')}>
+              className="transition-colors" style={{ color: '#A3A3A3' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#0A0A0A')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#A3A3A3')}>
               <FaGithub size={22} />
             </a>
             <a href="https://www.linkedin.com/in/ahmad-naufal-farras-182327340/" target="_blank" rel="noreferrer"
-              className="transition-colors" style={{ color: '#94A3B8' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#6366F1')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#94A3B8')}>
+              className="transition-colors" style={{ color: '#A3A3A3' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#0A0A0A')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#A3A3A3')}>
               <FaLinkedin size={22} />
             </a>
-            <span className="text-sm font-mono" style={{ color: '#94A3B8' }}>ahmadnaufalfarras@gmail.com</span>
+            <span className="text-sm font-mono" style={{ color: '#A3A3A3' }}>ahmadnaufalfarras@gmail.com</span>
           </motion.div>
         </div>
 
