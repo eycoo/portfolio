@@ -59,9 +59,8 @@ export const experiences: ExperienceItem[] = [
     id: 'innovillage',
     company: 'Innovillage',
     role: { en: 'AI Engineer', id: 'AI Engineer' },
-    period: 'Jan 2026 to Present',
+    period: 'Jan 2026 to Apr 2026',
     location: 'Sidoarjo, Indonesia',
-    current: true,
     bullets: [
       {
         en: 'Received funding to build a digital village solution for optimizing Tilapia fish farming.',
