@@ -1,86 +1,93 @@
 import { useTranslation } from 'react-i18next'
-import { motion } from 'framer-motion'
-import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa'
-import { Mail } from 'lucide-react'
+import SectionHeader from '../components/ui/SectionHeader'
 import Reveal from '../components/ui/Reveal'
-import SectionTitle from '../components/ui/SectionTitle'
+import { motion, useReducedMotion } from 'framer-motion'
 
-const contactLinks = [
+const CHANNELS = [
   {
     key: 'email',
-    icon: <Mail size={20} />,
     href: 'mailto:ahmadnaufalfarras@gmail.com',
-    label: 'email_btn',
     value: 'ahmadnaufalfarras@gmail.com',
-    color: '#0A0A0A',
   },
   {
     key: 'linkedin',
-    icon: <FaLinkedin size={20} />,
     href: 'https://www.linkedin.com/in/ahmad-naufal-farras-182327340/',
-    label: 'linkedin_btn',
     value: 'ahmad-naufal-farras',
-    color: '#262626',
   },
   {
     key: 'github',
-    icon: <FaGithub size={20} />,
     href: 'https://github.com/eycoo',
-    label: 'github_btn',
     value: 'github.com/eycoo',
-    color: '#525252',
   },
   {
     key: 'wa',
-    icon: <FaWhatsapp size={20} />,
     href: 'https://wa.me/6281331383599',
-    label: 'wa_btn',
     value: '+62 813-3138-3599',
-    color: '#737373',
   },
-]
+] as const
 
 export default function Contact() {
   const { t } = useTranslation()
+  const reduced = useReducedMotion()
+  const lines = t('contact.lines', { returnObjects: true }) as string[]
 
   return (
-    <section id="contact" className="py-28 px-6" style={{ background: '#F5F5F5' }}>
-      <div className="max-w-3xl mx-auto text-center">
-        <SectionTitle title={t('contact.title')} />
+    <section id="contact" className="section">
+      <div className="shell">
+        <SectionHeader
+          eyebrow={t('contact.eyebrow')}
+          code="(ANF® — 08)"
+          tag={t('contact.tag')}
+        />
+
+        <h2 className="t-h1 max-w-[16ch] pt-10 text-ink lg:pt-16">
+          {lines.map((line, i) => (
+            <motion.span
+              key={line}
+              className="block"
+              initial={reduced ? { opacity: 0 } : { opacity: 0, y: '0.2em' }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.9, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {line}
+            </motion.span>
+          ))}
+        </h2>
 
         <Reveal delay={0.1}>
-          <p className="text-lg mb-12" style={{ color: '#737373' }}>{t('contact.subtitle')}</p>
+          <p className="t-lead mt-8 max-w-[470px] text-ink-2">{t('contact.subtitle')}</p>
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 gap-4">
-          {contactLinks.map((link, i) => (
-            <Reveal key={link.key} delay={i * 0.08}>
-              <motion.a
-                href={link.href}
-                target={link.key !== 'email' ? '_blank' : undefined}
+        <ul className="mt-14 border-b border-line lg:mt-20">
+          {CHANNELS.map((channel, i) => (
+            <li key={channel.key} className="hair row">
+              <a
+                href={channel.href}
+                target={channel.key === 'email' ? undefined : '_blank'}
                 rel="noreferrer"
-                whileHover={{ scale: 1.03, y: -3 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-                className="flex items-center gap-4 bg-white rounded-2xl p-5 text-left group"
-                style={{ border: '1px solid #E5E5E5', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(0,0,0,0.10)'; (e.currentTarget as HTMLElement).style.borderColor = '#0A0A0A' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 1px 3px rgba(0,0,0,0.04)'; (e.currentTarget as HTMLElement).style.borderColor = '#E5E5E5' }}
+                className="grid grid-cols-1 items-baseline gap-2 py-7 lg:grid-cols-12 lg:gap-6 lg:py-9"
               >
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110"
-                  style={{ background: link.color, color: '#FFFFFF' }}
-                >
-                  {link.icon}
+                <div className="lg:col-span-1">
+                  <span className="t-label text-ink-3">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
                 </div>
-                <div>
-                  <p className="font-heading font-semibold text-sm" style={{ color: '#0A0A0A' }}>{t(`contact.${link.label}`)}</p>
-                  <p className="text-xs font-mono mt-0.5" style={{ color: '#A3A3A3' }}>{link.value}</p>
+
+                <div className="lg:col-span-5">
+                  <h3 className="t-h3 row__title text-ink-2">
+                    {t('contact.' + channel.key + '_btn')}
+                  </h3>
                 </div>
-              </motion.a>
-            </Reveal>
+
+                <div className="lg:col-span-6 lg:text-right">
+                  <span className="t-sm text-ink-3">{channel.value}</span>
+                  <span className="t-sm ml-4 text-ink-3">&#8599;</span>
+                </div>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   )

@@ -1,52 +1,77 @@
 import { useTranslation } from 'react-i18next'
-import { motion } from 'framer-motion'
+import SectionHeader from '../components/ui/SectionHeader'
 import Reveal from '../components/ui/Reveal'
-import SectionTitle from '../components/ui/SectionTitle'
 import { skillCategories } from '../data/skills'
 
 export default function Skills() {
   const { t, i18n } = useTranslation()
   const lang = i18n.language as 'en' | 'id'
+  const traits = t('skills.traits', { returnObjects: true }) as string[]
 
   return (
-    <section id="skills" className="py-28 px-6">
-      <div className="max-w-6xl mx-auto">
-        <SectionTitle title={t('skills.title')} />
+    <section id="skills" className="section">
+      <div className="shell">
+        <SectionHeader
+          eyebrow={t('skills.eyebrow')}
+          code="(ANF® — 04)"
+          tag={t('skills.tag')}
+        />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {skillCategories.map((cat, ci) => (
-            <Reveal key={cat.name.en} delay={ci * 0.08}>
-              <div className="rounded-2xl bg-white border p-6 h-full" style={{ borderColor: '#E5E5E5' }}>
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-2 h-2 rounded-full" style={{ background: cat.color }} />
-                  <h3 className="font-heading font-semibold text-xs uppercase tracking-widest" style={{ color: '#A3A3A3' }}>
-                    {cat.name[lang]}
-                  </h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {cat.skills.map((skill, si) => (
-                    <motion.span
-                      key={skill}
-                      initial={{ opacity: 0, scale: 0.85 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: ci * 0.04 + si * 0.025, ease: 'backOut' }}
-                      whileHover={{ scale: 1.06, y: -2 }}
-                      className="px-3 py-1.5 text-sm font-mono rounded-lg"
-                      style={{
-                        background: '#F5F5F5',
-                        border: '1px solid #E5E5E5',
-                        color: cat.color,
-                      }}
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
+        <div className="grid grid-cols-1 gap-10 py-10 lg:grid-cols-12 lg:gap-8 lg:py-16">
+          <div className="lg:col-span-6">
+            <Reveal>
+              <h2 className="t-h1 text-ink">
+                {t('skills.heading')}
+                <span className="t-label ml-4 align-super text-ink-3">
+                  ({String(skillCategories.length).padStart(2, '0')})
+                </span>
+              </h2>
             </Reveal>
-          ))}
+          </div>
+
+          <div className="lg:col-span-6">
+            <Reveal delay={0.08}>
+              <ul className="flex flex-wrap gap-x-8 gap-y-2">
+                {traits.map((trait) => (
+                  <li key={trait} className="t-label text-ink-3">
+                    {trait}
+                  </li>
+                ))}
+              </ul>
+              <p className="t-lead mt-6 max-w-[470px] text-ink-2">{t('skills.body')}</p>
+            </Reveal>
+          </div>
         </div>
+
+        <ul className="border-b border-line">
+          {skillCategories.map((category, i) => (
+            <li key={category.name.en} className="hair row">
+              <Reveal delay={i * 0.05}>
+                <div className="grid grid-cols-1 gap-4 py-7 lg:grid-cols-12 lg:gap-6 lg:py-9">
+                  <div className="lg:col-span-1">
+                    <span className="t-label text-ink-3">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  <div className="lg:col-span-4">
+                    <h3 className="t-h3 row__title text-ink">{category.name[lang]}</h3>
+                  </div>
+
+                  <div className="lg:col-span-7">
+                    <ul className="flex flex-wrap gap-x-5 gap-y-2">
+                      {category.skills.map((skill) => (
+                        <li key={skill} className="t-sm text-ink-2">
+                          {skill}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )

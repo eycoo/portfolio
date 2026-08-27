@@ -1,60 +1,129 @@
 {
+  "meta": {
+    "based": "Based in Surabaya 泗水",
+    "role": "AI Engineer + Deep Learning Researcher"
+  },
   "nav": {
-    "about": "About",
-    "skills": "Skills",
-    "experience": "Experience",
     "projects": "Projects",
+    "skills": "Capabilities",
+    "about": "Profile",
+    "experience": "Experience",
     "awards": "Awards",
-    "contact": "Contact"
+    "contact": "Contact",
+    "quick": "Quick Links",
+    "networks": "Networks",
+    "menu": "Menu",
+    "close": "Close"
   },
   "hero": {
-    "greeting": "Hi, I'm",
-    "title": "AI Engineer",
-    "subtitle": "Building intelligent systems that bridge research and real world impact.",
-    "cta_projects": "View Projects",
-    "cta_cv": "Download CV",
-    "study": "BSc AI Engineering @ ITS Surabaya",
-    "typewords": ["Computer Vision", "NLP & RAG", "Deep Learning", "Generative AI", "Audio AI"]
-  },
-  "about": {
-    "title": "About Me",
-    "body": "Artificial Intelligence Engineering Student at ITS focused on Applied Deep Learning. Gold Medalist at Gemastik XVIII and 1st Place Winner at BRIN AIDeaNation. Specialization in Audio and Image Processing, ranging from deploying bio acoustic models for healthcare to researching synthetic data with Stable Diffusion. Passionate about solving high stakes problems through AI engineering.",
-    "education_label": "Education",
-    "education": "Institut Teknologi Sepuluh Nopember",
-    "degree": "Bachelor of Science in Artificial Intelligence Engineering",
-    "period": "Jul 2024 to Present · GPA 3.4/4.0",
-    "location": "Surabaya, Indonesia"
-  },
-  "skills": {
-    "title": "Technical Skills"
-  },
-  "experience": {
-    "title": "Experience",
-    "current": "Current",
-    "show_more": "Show more",
-    "show_less": "Show less"
+    "lines": [
+      "Systems that",
+      "Learn, Reason,",
+      "and Deliver Real",
+      "World インパクト."
+    ],
+    "marquee": [
+      "Computer Vision",
+      "Audio Intelligence",
+      "Deep Learning",
+      "Generative Models",
+      "NLP & RAG",
+      "Neuromorphic"
+    ],
+    "eyebrow": "© Applied Deep Learning リサーチ",
+    "tag": "AI Engineer",
+    "roles": [
+      "Computer Vision",
+      "Audio Intelligence",
+      "Generative Models",
+      "Neuromorphic Research"
+    ],
+    "subtitle": "Artificial Intelligence Engineering student at ITS Surabaya. Gold Medalist at Gemastik XVIII, building systems that carry research all the way into production.",
+    "cta_contact": "Contact",
+    "cta_cv": "Download CV"
   },
   "projects": {
-    "title": "Projects",
+    "eyebrow": "© Featured Projects プロジェクト",
+    "tag": "Applied Research",
+    "heading": "Selected Works©",
+    "body": "Every project moves a model from paper to something that actually runs — audio diagnostics, medical imaging, generative pipelines, and vision systems built with intent, speed, and measurable results.",
     "filter_all": "All",
+    "detail": "Detail",
+    "close": "Close",
     "view_github": "GitHub",
     "view_demo": "Demo",
     "view_paper": "Paper",
     "no_link": "Links coming soon"
   },
+  "skills": {
+    "eyebrow": "© Capabilities スキル",
+    "tag": "Technical Stack",
+    "heading": "Capabilities",
+    "traits": [
+      "Precise",
+      "Structured",
+      "Applied"
+    ],
+    "body": "The stack behind the work — languages, frameworks, and specializations used across research and production."
+  },
+  "about": {
+    "eyebrow": "© Personal Profile プロフィール",
+    "tag": "Engineer & Researcher",
+    "body": "Artificial Intelligence Engineering student at ITS focused on applied deep learning. Gold Medalist at Gemastik XVIII and 1st Place at BRIN AIDeaNation, specializing in audio and image processing — from deploying bio-acoustic models for healthcare to researching synthetic data with Stable Diffusion.",
+    "education_label": "Education",
+    "education": "Institut Teknologi Sepuluh Nopember",
+    "degree_label": "Degree",
+    "degree": "Bachelor of Science in Artificial Intelligence Engineering",
+    "period_label": "Period",
+    "period": "Jul 2024 — Present · GPA 3.4 / 4.0",
+    "location_label": "Location",
+    "location": "Surabaya, Indonesia",
+    "email_label": "Email",
+    "phone_label": "Phone",
+    "cta_works": "See Works"
+  },
+  "experience": {
+    "eyebrow": "© Experience エクスペリエンス",
+    "tag": "Applied Practice",
+    "word": "Practice.",
+    "count": "({{n}}) Positions",
+    "current": "Now",
+    "hint": "Select a role to read the detail"
+  },
   "awards": {
-    "title": "Honors & Awards"
+    "eyebrow": "© Awards アワード",
+    "tag": "Selected Honors",
+    "heading": "Awards",
+    "body": "National and international recognition for applied AI work across healthcare, social impact, and scientific research.",
+    "view_cert": "View Certificate",
+    "close": "Close",
+    "cert_alt": "Award certificate"
   },
   "contact": {
-    "title": "Let's Connect",
-    "subtitle": "Open to research collaborations, AI projects, and freelance engagements.",
+    "eyebrow": "© Get In Touch コンタクト",
+    "tag": "Open For Work",
+    "lines": [
+      "Let's Build",
+      "Something Real",
+      "一緒に."
+    ],
+    "subtitle": "Open to research collaborations, AI engineering roles, and freelance engagements.",
     "email_btn": "Send Email",
     "linkedin_btn": "LinkedIn",
     "github_btn": "GitHub",
     "wa_btn": "WhatsApp"
   },
   "footer": {
-    "built": "Built with React, Vite & Framer Motion",
-    "source": "View Source"
+    "eyebrow": "© Final Section クロージング",
+    "tag": "Closing",
+    "traits": [
+      "Independent",
+      "Applied",
+      "Multidisciplinary",
+      "Research-Led"
+    ],
+    "statement": "I build AI systems that hold up outside the notebook — from bio-acoustic diagnosis to generative data pipelines and neuromorphic vision.",
+    "top": "Back To Top",
+    "built": "Built with React, Vite & Framer Motion"
   }
 }

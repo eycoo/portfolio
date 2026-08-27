@@ -1,22 +1,45 @@
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import SplitText from '../ui/SplitText'
+
+const LINKS = ['projects', 'skills', 'about', 'experience', 'awards', 'contact'] as const
 
 export default function Navbar() {
   const { t, i18n } = useTranslation()
-  const { scrollY } = useScroll()
-  const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const [activeLink, setActiveLink] = useState<string | null>(null)
+  const [active, setActive] = useState<string>('')
 
-  useMotionValueEvent(scrollY, 'change', (v) => setScrolled(v > 40))
+  useEffect(() => {
+    const sections = LINKS.map((id) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => el !== null,
+    )
+    if (sections.length === 0) return
 
-  const links = ['about', 'skills', 'experience', 'projects', 'awards', 'contact'] as const
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (visible) setActive(visible.target.id)
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.25, 0.5, 1] },
+    )
 
-  function scrollTo(id: string) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    sections.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
+  function goTo(id: string) {
     setOpen(false)
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   function toggleLang() {
@@ -24,90 +47,84 @@ export default function Navbar() {
   }
 
   return (
-    <motion.header
-      className="fixed top-0 inset-x-0 z-50"
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      style={{
-        background: scrolled ? 'rgba(255,255,255,0.90)' : '#FFFFFF',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        borderBottom: '1px solid #E5E5E5',
-        boxShadow: scrolled ? '0 2px 16px rgba(0,0,0,0.06)' : 'none',
-      }}
-    >
-      <nav className="max-w-6xl mx-auto px-6 py-3.5 flex items-center justify-between">
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="font-heading font-bold text-xl cursor-pointer tracking-tight"
-          style={{ color: '#0A0A0A' }}
-        >
-          Ahmad Naufal <span style={{ color: '#737373' }}>Farras</span>
-        </button>
-
-        <ul className="hidden md:flex items-center gap-1">
-          {links.map((l) => (
-            <li key={l}>
-              <button
-                onClick={() => { scrollTo(l); setActiveLink(l) }}
-                onMouseEnter={() => setActiveLink(l)}
-                onMouseLeave={() => setActiveLink(null)}
-                className="relative text-sm font-medium px-3.5 py-2 rounded-lg transition-all cursor-pointer"
-                style={{
-                  color: activeLink === l ? '#0A0A0A' : '#737373',
-                  background: activeLink === l ? '#F5F5F5' : 'transparent',
-                }}
-              >
-                {t(`nav.${l}`)}
-              </button>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex items-center gap-3">
+    <header className="fixed inset-x-0 top-0 z-50">
+      <nav className="hair-b bg-base/80 backdrop-blur-xl">
+        <div className="shell flex h-16 items-center justify-between gap-6">
           <button
-            onClick={toggleLang}
-            className="text-sm font-medium transition-all cursor-pointer"
-            style={{ color: '#737373', background: 'transparent', padding: '0' }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#0A0A0A')}
-            onMouseLeave={e => (e.currentTarget.style.color = '#737373')}
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="split-trigger t-micro cursor-pointer text-ink"
           >
-            {i18n.language === 'en' ? 'ID' : 'EN'}
+            <SplitText text="Farras®" />
           </button>
-          <button
-            className="md:hidden p-1.5 rounded-lg cursor-pointer"
-            style={{ color: '#525252' }}
-            onClick={() => setOpen((o) => !o)}
-            aria-label="Toggle menu"
-          >
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
+
+          <ul className="hidden items-center gap-8 lg:flex">
+            {LINKS.map((id) => (
+              <li key={id}>
+                <button
+                  type="button"
+                  onClick={() => goTo(id)}
+                  className={`split-trigger t-label cursor-pointer transition-colors duration-500 ${
+                    active === id ? 'text-ink' : 'text-ink-3 hover:text-ink'
+                  }`}
+                >
+                  <SplitText text={t(`nav.${id}`)} />
+                </button>
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex items-center gap-5">
+            <button
+              type="button"
+              onClick={toggleLang}
+              aria-label="Toggle language"
+              className="t-label cursor-pointer text-ink-3 transition-colors duration-500 hover:text-ink"
+            >
+              {i18n.language === 'en' ? 'EN / id' : 'en / ID'}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setOpen((o) => !o)}
+              aria-label="Toggle menu"
+              aria-expanded={open}
+              className="t-label cursor-pointer text-ink lg:hidden"
+            >
+              {open ? t('nav.close') : t('nav.menu')}
+            </button>
+          </div>
         </div>
       </nav>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="md:hidden overflow-hidden"
-            style={{ background: '#FFFFFF', borderTop: '1px solid #E5E5E5' }}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="hair-b overflow-hidden bg-base lg:hidden"
           >
-            {links.map((l) => (
-              <button
-                key={l}
-                onClick={() => scrollTo(l)}
-                className="block w-full text-left px-6 py-4 text-sm font-medium cursor-pointer"
-                style={{ color: '#525252', borderBottom: '1px solid #F5F5F5' }}
-              >
-                {t(`nav.${l}`)}
-              </button>
-            ))}
+            <ul className="shell py-2">
+              {LINKS.map((id, i) => (
+                <li key={id} className={i === 0 ? '' : 'hair'}>
+                  <button
+                    type="button"
+                    onClick={() => goTo(id)}
+                    className="flex w-full cursor-pointer items-baseline justify-between py-4 text-left"
+                  >
+                    <span className="t-h3 text-ink">{t(`nav.${id}`)}</span>
+                    <span className="t-label text-ink-3">
+                      ({String(i + 1).padStart(2, '0')})
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   )
 }

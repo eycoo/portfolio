@@ -1,16 +1,16 @@
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
-import { X } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import SectionHeader from '../components/ui/SectionHeader'
+import SplitText from '../components/ui/SplitText'
 import Reveal from '../components/ui/Reveal'
-import SectionTitle from '../components/ui/SectionTitle'
 import { awards } from '../data/awards'
 
-const medalConfig = {
-  gold:    { emoji: '🥇', color: '#0A0A0A', border: '#E5E5E5' },
-  silver:  { emoji: '🥈', color: '#525252', border: '#E5E5E5' },
-  bronze:  { emoji: '🥉', color: '#737373', border: '#E5E5E5' },
-  special: { emoji: '⭐', color: '#262626', border: '#E5E5E5' },
+const RANK: Record<string, string> = {
+  gold: 'Gold',
+  silver: 'Silver',
+  bronze: 'Bronze',
+  special: 'Special',
 }
 
 export default function Awards() {
@@ -18,81 +18,110 @@ export default function Awards() {
   const lang = i18n.language as 'en' | 'id'
   const [lightbox, setLightbox] = useState<string | null>(null)
 
+  useEffect(() => {
+    if (!lightbox) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightbox(null)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [lightbox])
+
   return (
-    <section id="awards" className="py-28 px-6">
-      <div className="max-w-5xl mx-auto">
-        <SectionTitle title={t('awards.title')} />
+    <section id="awards" className="section">
+      <div className="shell">
+        <SectionHeader
+          eyebrow={t('awards.eyebrow')}
+          code="(ANF® — 07)"
+          tag={t('awards.tag')}
+        />
 
-        <div className="grid sm:grid-cols-2 gap-5">
-          {awards.map((award, i) => {
-            const cfg = medalConfig[award.medal]
-            return (
-              <Reveal key={i} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ scale: 1.02, y: -3 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                  className="rounded-2xl bg-white overflow-hidden"
-                  style={{ border: `1px solid ${cfg.border}`, boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}
-                >
-                  {/* Certificate image */}
-                  {award.image && (
-                    <button
-                      className="w-full overflow-hidden cursor-zoom-in block"
-                      style={{ height: '160px' }}
-                      onClick={() => setLightbox(award.image!)}
-                    >
-                      <img
-                        src={award.image}
-                        alt={award.event}
-                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                      />
-                    </button>
-                  )}
+        <div className="grid grid-cols-1 gap-10 py-10 lg:grid-cols-12 lg:gap-8 lg:py-16">
+          <div className="lg:col-span-6">
+            <Reveal>
+              <h2 className="t-h1 text-ink">
+                {t('awards.heading')}
+                <span className="t-label ml-4 align-super text-ink-3">
+                  ({String(awards.length).padStart(2, '0')})
+                </span>
+              </h2>
+            </Reveal>
+          </div>
 
-                  <div className="p-5 flex items-start gap-4">
-                    <div className="text-3xl shrink-0 select-none">{cfg.emoji}</div>
-                    <div>
-                      <p className="font-heading font-bold text-lg" style={{ color: cfg.color }}>
-                        {award.title[lang]}
-                      </p>
-                      <p className="font-medium mt-0.5 text-sm" style={{ color: '#525252' }}>{award.event}</p>
-                      <p className="text-xs font-mono mt-1" style={{ color: '#A3A3A3' }}>{award.year}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </Reveal>
-            )
-          })}
+          <div className="lg:col-span-6">
+            <Reveal delay={0.08}>
+              <p className="t-lead max-w-[470px] text-ink-2">{t('awards.body')}</p>
+            </Reveal>
+          </div>
         </div>
+
+        <ul className="border-b border-line">
+          {awards.map((award, i) => (
+            <li key={`${award.event}-${award.year}`} className="hair row">
+              <Reveal delay={i * 0.05}>
+                <div className="grid grid-cols-1 gap-3 py-7 lg:grid-cols-12 lg:items-baseline lg:gap-6 lg:py-9">
+                  <div className="lg:col-span-1">
+                    <span className="t-label text-ink-3">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  <div className="lg:col-span-4">
+                    <h3 className="t-h3 row__title text-ink">{award.title[lang]}</h3>
+                    <p className="t-label mt-2 text-ink-3">{RANK[award.medal]}</p>
+                  </div>
+
+                  <div className="lg:col-span-5">
+                    <p className="t-sm text-ink-2">{award.event}</p>
+                    {award.image && (
+                      <button
+                        type="button"
+                        onClick={() => setLightbox(award.image ?? null)}
+                        className="split-trigger t-label mt-3 cursor-pointer text-ink-3 transition-colors duration-500 hover:text-ink"
+                      >
+                        <SplitText text={'[' + t('awards.view_cert') + ']'} />
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="lg:col-span-2 lg:text-right">
+                    <span className="t-label text-ink-3">{award.year}</span>
+                  </div>
+                </div>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
       </div>
 
-      {/* Lightbox */}
       <AnimatePresence>
         {lightbox && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-6 cursor-zoom-out"
-            style={{ background: 'rgba(0,0,0,0.85)' }}
+            transition={{ duration: 0.35 }}
+            role="dialog"
+            aria-modal="true"
+            className="fixed inset-0 z-[60] flex cursor-zoom-out items-center justify-center bg-base/95 p-6 backdrop-blur-sm"
             onClick={() => setLightbox(null)}
           >
             <motion.img
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               src={lightbox}
-              alt="Certificate"
-              className="max-w-full max-h-full rounded-xl object-contain"
-              style={{ maxWidth: '90vw', maxHeight: '90vh' }}
-              onClick={e => e.stopPropagation()}
+              alt={t('awards.cert_alt')}
+              className="max-h-[90vh] max-w-[90vw] rounded-brand object-contain"
+              onClick={(e) => e.stopPropagation()}
             />
             <button
+              type="button"
               onClick={() => setLightbox(null)}
-              className="absolute top-6 right-6 p-2 rounded-full cursor-pointer"
-              style={{ background: 'rgba(255,255,255,0.1)', color: '#FFFFFF' }}
+              className="t-label absolute top-6 right-6 cursor-pointer text-ink"
             >
-              <X size={20} />
+              [{t('awards.close')}]
             </button>
           </motion.div>
         )}

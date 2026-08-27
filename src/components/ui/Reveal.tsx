@@ -1,33 +1,24 @@
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 
 interface RevealProps {
   children: React.ReactNode
   delay?: number
-  direction?: 'up' | 'left' | 'right'
   className?: string
 }
 
-export default function Reveal({ children, delay = 0, direction = 'up', className }: RevealProps) {
+/** Restrained entrance — the reference barely moves anything. */
+export default function Reveal({ children, delay = 0, className }: RevealProps) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
-  const variants = {
-    hidden: {
-      opacity: 0,
-      y: direction === 'up' ? 40 : 0,
-      x: direction === 'left' ? -40 : direction === 'right' ? 40 : 0,
-    },
-    visible: { opacity: 1, y: 0, x: 0 },
-  }
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const reduced = useReducedMotion()
 
   return (
     <motion.div
       ref={ref}
-      variants={variants}
-      initial="hidden"
-      animate={inView ? 'visible' : 'hidden'}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      initial={reduced ? { opacity: 0 } : { opacity: 0, y: 18 }}
+      animate={inView ? { opacity: 1, y: 0 } : undefined}
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}

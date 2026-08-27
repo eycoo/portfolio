@@ -1,60 +1,129 @@
 {
+  "meta": {
+    "based": "Berbasis di Surabaya 泗水",
+    "role": "AI Engineer + Peneliti Deep Learning"
+  },
   "nav": {
-    "about": "Tentang",
-    "skills": "Keahlian",
-    "experience": "Pengalaman",
     "projects": "Proyek",
+    "skills": "Kapabilitas",
+    "about": "Profil",
+    "experience": "Pengalaman",
     "awards": "Penghargaan",
-    "contact": "Kontak"
+    "contact": "Kontak",
+    "quick": "Tautan Cepat",
+    "networks": "Jaringan",
+    "menu": "Menu",
+    "close": "Tutup"
   },
   "hero": {
-    "greeting": "Hai, saya",
-    "title": "AI Engineer",
-    "subtitle": "Membangun sistem cerdas yang menjembatani riset dan dampak nyata.",
-    "cta_projects": "Lihat Proyek",
-    "cta_cv": "Unduh CV",
-    "study": "S1 Teknik Kecerdasan Artifisial @ ITS Surabaya",
-    "typewords": ["Computer Vision", "NLP & RAG", "Deep Learning", "AI Generatif", "Audio AI"]
-  },
-  "about": {
-    "title": "Tentang Saya",
-    "body": "Mahasiswa Teknik Kecerdasan Artifisial di ITS dengan fokus pada Applied Deep Learning. Peraih Medali Emas Gemastik XVIII dan Juara 1 BRIN AIDeaNation. Spesialisasi di Audio dan Image Processing, mulai dari deployment model bio akustik untuk kesehatan hingga riset synthetic data dengan Stable Diffusion. Passionate dalam memecahkan masalah berdampak tinggi lewat rekayasa AI.",
-    "education_label": "Pendidikan",
-    "education": "Institut Teknologi Sepuluh Nopember",
-    "degree": "Sarjana Teknik Kecerdasan Artifisial",
-    "period": "Jul 2024 sampai Sekarang · IPK 3.4/4.0",
-    "location": "Surabaya, Indonesia"
-  },
-  "skills": {
-    "title": "Keahlian Teknis"
-  },
-  "experience": {
-    "title": "Pengalaman",
-    "current": "Aktif",
-    "show_more": "Tampilkan lebih",
-    "show_less": "Tampilkan lebih sedikit"
+    "lines": [
+      "Sistem Cerdas",
+      "yang Belajar",
+      "dan Memberi",
+      "Dampak インパクト."
+    ],
+    "marquee": [
+      "Computer Vision",
+      "Audio Intelligence",
+      "Deep Learning",
+      "Model Generatif",
+      "NLP & RAG",
+      "Neuromorphic"
+    ],
+    "eyebrow": "© Applied Deep Learning リサーチ",
+    "tag": "AI Engineer",
+    "roles": [
+      "Computer Vision",
+      "Audio Intelligence",
+      "Model Generatif",
+      "Riset Neuromorphic"
+    ],
+    "subtitle": "Mahasiswa Teknik Kecerdasan Artifisial di ITS Surabaya. Peraih Medali Emas Gemastik XVIII, membangun sistem yang membawa riset sampai ke tahap produksi.",
+    "cta_contact": "Kontak",
+    "cta_cv": "Unduh CV"
   },
   "projects": {
-    "title": "Proyek",
+    "eyebrow": "© Featured Projects プロジェクト",
+    "tag": "Riset Terapan",
+    "heading": "Karya Pilihan©",
+    "body": "Setiap proyek membawa model dari makalah menjadi sesuatu yang benar-benar berjalan — diagnosis audio, pencitraan medis, pipeline generatif, dan sistem visi yang dibangun dengan tujuan, kecepatan, dan hasil terukur.",
     "filter_all": "Semua",
+    "detail": "Detail",
+    "close": "Tutup",
     "view_github": "GitHub",
     "view_demo": "Demo",
     "view_paper": "Paper",
-    "no_link": "Link segera hadir"
+    "no_link": "Tautan segera hadir"
+  },
+  "skills": {
+    "eyebrow": "© Capabilities スキル",
+    "tag": "Stack Teknis",
+    "heading": "Kapabilitas",
+    "traits": [
+      "Presisi",
+      "Terstruktur",
+      "Terapan"
+    ],
+    "body": "Stack di balik seluruh pekerjaan — bahasa, framework, dan spesialisasi yang dipakai lintas riset dan produksi."
+  },
+  "about": {
+    "eyebrow": "© Personal Profile プロフィール",
+    "tag": "Engineer & Peneliti",
+    "body": "Mahasiswa Teknik Kecerdasan Artifisial di ITS dengan fokus pada applied deep learning. Peraih Medali Emas Gemastik XVIII dan Juara 1 BRIN AIDeaNation, dengan spesialisasi audio dan image processing — dari deployment model bio-akustik untuk kesehatan hingga riset synthetic data dengan Stable Diffusion.",
+    "education_label": "Pendidikan",
+    "education": "Institut Teknologi Sepuluh Nopember",
+    "degree_label": "Gelar",
+    "degree": "Sarjana Teknik Kecerdasan Artifisial",
+    "period_label": "Periode",
+    "period": "Jul 2024 — Sekarang · IPK 3.4 / 4.0",
+    "location_label": "Lokasi",
+    "location": "Surabaya, Indonesia",
+    "email_label": "Email",
+    "phone_label": "Telepon",
+    "cta_works": "Lihat Karya"
+  },
+  "experience": {
+    "eyebrow": "© Experience エクスペリエンス",
+    "tag": "Praktik Terapan",
+    "word": "Praktik.",
+    "count": "({{n}}) Posisi",
+    "current": "Aktif",
+    "hint": "Pilih salah satu peran untuk membaca detailnya"
   },
   "awards": {
-    "title": "Penghargaan"
+    "eyebrow": "© Awards アワード",
+    "tag": "Penghargaan Pilihan",
+    "heading": "Penghargaan",
+    "body": "Pengakuan nasional dan internasional untuk karya AI terapan di bidang kesehatan, dampak sosial, dan riset ilmiah.",
+    "view_cert": "Lihat Sertifikat",
+    "close": "Tutup",
+    "cert_alt": "Sertifikat penghargaan"
   },
   "contact": {
-    "title": "Mari Terhubung",
-    "subtitle": "Terbuka untuk kolaborasi riset, proyek AI, dan kerja sama freelance.",
+    "eyebrow": "© Get In Touch コンタクト",
+    "tag": "Terbuka Untuk Kerja",
+    "lines": [
+      "Mari Bangun",
+      "Sesuatu yang Nyata",
+      "一緒に."
+    ],
+    "subtitle": "Terbuka untuk kolaborasi riset, peran AI engineering, dan kerja sama freelance.",
     "email_btn": "Kirim Email",
     "linkedin_btn": "LinkedIn",
     "github_btn": "GitHub",
     "wa_btn": "WhatsApp"
   },
   "footer": {
-    "built": "Dibangun dengan React, Vite & Framer Motion",
-    "source": "Lihat Kode"
+    "eyebrow": "© Final Section クロージング",
+    "tag": "Penutup",
+    "traits": [
+      "Independen",
+      "Terapan",
+      "Multidisiplin",
+      "Berbasis Riset"
+    ],
+    "statement": "Saya membangun sistem AI yang tetap bekerja di luar notebook — dari diagnosis bio-akustik hingga pipeline data generatif dan visi neuromorphic.",
+    "top": "Kembali Ke Atas",
+    "built": "Dibangun dengan React, Vite & Framer Motion"
   }
 }
