@@ -2,8 +2,6 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AnimatePresence, motion } from 'framer-motion'
 import SectionHeader from '../components/ui/SectionHeader'
-import SplitText from '../components/ui/SplitText'
-import Reveal from '../components/ui/Reveal'
 import { projects } from '../data/projects'
 
 const ALL = '__all__'
@@ -23,30 +21,24 @@ export default function Projects() {
       <div className="shell">
         <SectionHeader
           eyebrow={t('projects.eyebrow')}
-          code="(ANF® — 03)"
           tag={t('projects.tag')}
         />
 
         <div className="grid grid-cols-1 gap-10 py-10 lg:grid-cols-12 lg:gap-8 lg:py-16">
-          <div className="lg:col-span-6">
-            <Reveal>
+          <div className="min-w-0 lg:col-span-6">
               <h2 className="t-h1 text-ink">
                 {t('projects.heading')}
                 <span className="t-label ml-4 align-super text-ink-3">
                   ({String(projects.length).padStart(2, '0')})
                 </span>
               </h2>
-            </Reveal>
           </div>
 
-          <div className="lg:col-span-6">
-            <Reveal delay={0.08}>
+          <div className="min-w-0 lg:col-span-6">
               <p className="t-lead max-w-[470px] text-ink-2">{t('projects.body')}</p>
-            </Reveal>
           </div>
         </div>
 
-        <Reveal>
           <div className="flex flex-wrap gap-2 pb-10">
             {[ALL, ...allTags].map((tag) => {
               const isActive = activeTag === tag
@@ -55,11 +47,12 @@ export default function Projects() {
                   key={tag}
                   type="button"
                   onClick={() => setActiveTag(tag)}
+                  aria-pressed={isActive}
                   className={
-                    't-label cursor-pointer rounded-brand border px-3.5 py-2 transition-colors duration-500 ' +
+                    't-label min-h-11 cursor-pointer rounded-brand border px-3.5 py-2 transition-colors duration-500 ' +
                     (isActive
                       ? 'border-ink bg-ink text-base'
-                      : 'border-line text-ink-3 hover:border-line-2 hover:text-ink')
+                      : 'border-line-2 text-ink-3 hover:border-ink hover:text-ink')
                   }
                 >
                   {tag === ALL ? t('projects.filter_all') : tag}
@@ -67,29 +60,20 @@ export default function Projects() {
               )
             })}
           </div>
-        </Reveal>
 
         <ul className="border-b border-line">
-          <AnimatePresence initial={false} mode="popLayout">
             {filtered.map((project, i) => {
               const isOpen = open === project.id
               return (
-                <motion.li
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="hair row"
-                >
+                <li key={project.id} className="hair row">
                   <button
                     type="button"
                     onClick={() => setOpen(isOpen ? null : project.id)}
                     aria-expanded={isOpen}
+                    aria-controls={`project-${project.id}`}
                     className="grid w-full cursor-pointer grid-cols-1 items-baseline gap-3 py-7 text-left lg:grid-cols-12 lg:gap-6 lg:py-9"
                   >
-                    <div className="lg:col-span-9">
+                    <div className="min-w-0 lg:col-span-9">
                       <p className="t-label mb-3 text-ink-3">
                         {project.year}
                         <span className="mx-2 opacity-40">/</span>
@@ -101,7 +85,7 @@ export default function Projects() {
                           </>
                         )}
                       </p>
-                      <h3 className="t-h2 row__title text-ink-2">{project.title}</h3>
+                      <h3 className="t-h2 row__title break-words text-ink-2">{project.title}</h3>
                     </div>
 
                     <div className="flex items-baseline justify-between gap-6 lg:col-span-3 lg:justify-end">
@@ -117,6 +101,7 @@ export default function Projects() {
                   <AnimatePresence initial={false}>
                     {isOpen && (
                       <motion.div
+                        id={`project-${project.id}`}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
@@ -124,14 +109,14 @@ export default function Projects() {
                         className="overflow-hidden"
                       >
                         <div className="grid grid-cols-1 gap-8 pb-10 lg:grid-cols-12 lg:gap-6">
-                          <div className="lg:col-span-9">
+                          <div className="min-w-0 lg:col-span-9">
                             <ul className="max-w-[870px] space-y-4">
                               {project.bullets.map((bullet, bi) => (
                                 <li key={bi} className="flex gap-4">
                                   <span className="t-label shrink-0 pt-1.5 text-ink-3">
                                     {String(bi + 1).padStart(2, '0')}
                                   </span>
-                                  <p className="t-sm text-ink-2">{bullet[lang]}</p>
+                                  <p className="t-sm min-w-0 break-words text-ink-2">{bullet[lang]}</p>
                                 </li>
                               ))}
                             </ul>
@@ -145,7 +130,7 @@ export default function Projects() {
                             </ul>
                           </div>
 
-                          <div className="lg:col-span-3">
+                          <div className="min-w-0 lg:col-span-3">
                             {project.links.github || project.links.demo || project.links.paper ? (
                               <ul className="space-y-3 lg:text-right">
                                 {project.links.github && (
@@ -154,9 +139,9 @@ export default function Projects() {
                                       href={project.links.github}
                                       target="_blank"
                                       rel="noreferrer"
-                                      className="split-trigger t-sm inline-block text-ink-2 transition-colors duration-500 hover:text-ink"
+                                      className="t-sm inline-flex min-h-11 items-center text-ink-2 transition-colors duration-500 hover:text-ink"
                                     >
-                                      <SplitText text={'[' + t('projects.view_github') + ']'} />
+                                      {t('projects.view_github')}
                                     </a>
                                   </li>
                                 )}
@@ -166,9 +151,9 @@ export default function Projects() {
                                       href={project.links.demo}
                                       target="_blank"
                                       rel="noreferrer"
-                                      className="split-trigger t-sm inline-block text-ink-2 transition-colors duration-500 hover:text-ink"
+                                      className="t-sm inline-flex min-h-11 items-center text-ink-2 transition-colors duration-500 hover:text-ink"
                                     >
-                                      <SplitText text={'[' + t('projects.view_demo') + ']'} />
+                                      {t('projects.view_demo')}
                                     </a>
                                   </li>
                                 )}
@@ -178,9 +163,9 @@ export default function Projects() {
                                       href={project.links.paper}
                                       target="_blank"
                                       rel="noreferrer"
-                                      className="split-trigger t-sm inline-block text-ink-2 transition-colors duration-500 hover:text-ink"
+                                      className="t-sm inline-flex min-h-11 items-center text-ink-2 transition-colors duration-500 hover:text-ink"
                                     >
-                                      <SplitText text={'[' + t('projects.view_paper') + ']'} />
+                                      {t('projects.view_paper')}
                                     </a>
                                   </li>
                                 )}
@@ -195,10 +180,9 @@ export default function Projects() {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </motion.li>
+                </li>
               )
             })}
-          </AnimatePresence>
         </ul>
       </div>
     </section>

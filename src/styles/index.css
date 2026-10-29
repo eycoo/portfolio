@@ -1,39 +1,26 @@
 @import "tailwindcss";
 
-/* ─────────────────────────────────────────────────────────────
-   Design tokens — measured from the Palmer reference
-   #000 canvas · #fff ink · #bbb secondary · #999 muted
-   #222 surface · rgba(187,187,187,.2) hairline · 10px radius
-   ───────────────────────────────────────────────────────────── */
 @theme {
-  --color-base: #000000;
-  --color-elev: #0b0b0b;
-  --color-surface: #141414;
-  --color-surface-2: #222222;
-
-  --color-ink: #ffffff;
-  --color-ink-2: #bbbbbb;
-  --color-ink-3: #999999;
-
-  --color-line: rgba(187, 187, 187, 0.2);
-  --color-line-2: rgba(187, 187, 187, 0.35);
-
+  --color-base: #102528;
+  --color-elev: #152e2d;
+  --color-surface: #183134;
+  --color-surface-2: #20433f;
+  --color-ink: #f2f5ef;
+  --color-ink-2: #cedbd5;
+  --color-ink-3: #b7c9c5;
+  --color-accent: #c2e8cf;
+  --color-line: #45605b;
+  --color-line-2: #819d94;
   --font-display: "Inter Tight", "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
-
-  --radius-brand: 10px;
+  --radius-brand: 6px;
 }
 
 :root {
   --shell: 1480px;
-  --gutter: 24px;
+  --gutter: clamp(20px, 4.5vw, 72px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@media (max-width: 809px) {
-  :root {
-    --gutter: 20px;
-  }
+  color-scheme: dark;
 }
 
 * {
@@ -41,50 +28,40 @@
 }
 
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 96px;
-  background: #000;
+  scroll-padding-top: 88px;
+  background: var(--color-base);
 }
 
 body {
   margin: 0;
-  background: #000;
-  color: #fff;
+  color: var(--color-ink);
+  background: var(--color-base);
   font-family: var(--font-body);
-  font-feature-settings: "ss01" on, "ss03" on, "cv06" on;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button {
+  min-height: 44px;
 }
 
 ::selection {
-  background: #fff;
-  color: #000;
+  background: var(--color-accent);
+  color: var(--color-base);
 }
 
 :focus-visible {
-  outline: 1px solid #fff;
-  outline-offset: 3px;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 5px;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #000;
-}
-::-webkit-scrollbar-thumb {
-  background: #222;
-  border: 3px solid #000;
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3a3a3a;
-}
-
-/* ── Shell ────────────────────────────────────────────────── */
 .shell {
   width: 100%;
   max-width: var(--shell);
@@ -93,7 +70,7 @@ body {
 }
 
 .section {
-  padding-block: clamp(72px, 9vw, 148px);
+  padding-block: clamp(56px, 7vw, 112px);
 }
 
 .hair {
@@ -104,7 +81,6 @@ body {
   border-bottom: 1px solid var(--color-line);
 }
 
-/* ── Type scale ───────────────────────────────────────────── */
 .t-display,
 .t-h1,
 .t-h2,
@@ -115,256 +91,180 @@ body {
 .t-label,
 .t-micro {
   font-family: var(--font-display);
-  margin: 0;
 }
 
-/* Sized so the longest hero line (~17 char-equivalents) clears the 1480px
-   shell at every breakpoint rather than wrapping. */
 .t-display {
-  font-size: clamp(40px, 10vw, 150px);
-  font-weight: 600;
-  letter-spacing: -0.048em;
-  line-height: 0.94;
+  font-size: clamp(2.75rem, 9.5vw, 9rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
 }
 
 .t-h1 {
-  font-size: clamp(36px, 5.3vw, 79px);
+  font-size: clamp(2.25rem, 5vw, 4.75rem);
   font-weight: 500;
-  letter-spacing: -0.027em;
-  line-height: 1;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
 }
 
 .t-h2 {
-  font-size: clamp(24px, 3.3vw, 49px);
+  font-size: clamp(1.5rem, 3.2vw, 3rem);
   font-weight: 500;
-  letter-spacing: -0.017em;
-  line-height: 1.04;
+  letter-spacing: -0.025em;
+  line-height: 1.16;
 }
 
 .t-h3 {
-  font-size: clamp(20px, 2.1vw, 31px);
+  font-size: clamp(1.25rem, 2.1vw, 1.9rem);
   font-weight: 500;
-  letter-spacing: -0.026em;
-  line-height: 1.09;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
 }
 
 .t-lead {
-  font-size: clamp(18px, 1.5vw, 22px);
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
   font-weight: 400;
-  letter-spacing: -0.014em;
-  line-height: 1.39;
+  letter-spacing: -0.012em;
+  line-height: 1.55;
 }
 
 .t-body {
-  font-size: clamp(16px, 1.3vw, 19px);
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  line-height: 1.33;
+  font-size: clamp(1rem, 1.3vw, 1.1875rem);
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 .t-sm {
-  font-size: 17px;
-  font-weight: 500;
-  line-height: 1.25;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 .t-label {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
 }
 
 .t-micro {
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0.1px;
-  line-height: 1.21;
-}
-
-/* ── Letter-split hover (nav links, buttons) ──────────────── */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
-
-.split {
-  display: inline-flex;
-  white-space: pre;
   line-height: 1.25;
 }
 
-.split__char {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
+.hero {
+  background: linear-gradient(125deg, #173d35 0%, #204e4a 60%, #102528 100%);
 }
 
-.split__stack {
-  display: block;
-  transition: transform 0.55s var(--ease);
-  transition-delay: inherit;
+.hero__name {
+  padding-block: clamp(48px, 7vw, 104px);
 }
 
-.split__stack > span {
-  display: block;
+.hero__intro {
+  border-top: 1px solid var(--color-line-2);
 }
 
-.split-trigger:hover .split__stack,
-.split-trigger:focus-visible .split__stack,
-.split-on .split__stack {
-  transform: translateY(-50%);
+#skills {
+  background: var(--color-elev);
 }
 
-/* ── Bracket button ───────────────────────────────────────── */
+#contact {
+  background: linear-gradient(135deg, #102528, #204e4a);
+}
+
+footer {
+  padding-top: clamp(40px, 5vw, 72px);
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  min-height: 48px;
   border-radius: var(--radius-brand);
-  padding: 15px 26px;
-  font-family: var(--font-display);
-  font-size: 16px;
+  padding: 12px 24px;
+  font-family: var(--font-body);
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.5;
   cursor: pointer;
   border: 1px solid transparent;
-  transition:
-    background-color 0.4s var(--ease),
-    color 0.4s var(--ease),
-    border-color 0.4s var(--ease);
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
 }
 
 .btn--solid {
-  background: #fff;
-  color: #000;
+  background: var(--color-accent);
+  color: var(--color-base);
 }
+
 .btn--solid:hover {
-  background: #bbb;
+  background: var(--color-ink);
 }
 
 .btn--ghost {
   background: transparent;
-  color: #fff;
+  color: var(--color-ink);
   border-color: var(--color-line-2);
 }
+
 .btn--ghost:hover {
-  background: #fff;
-  color: #000;
-  border-color: #fff;
+  background: var(--color-ink);
+  color: var(--color-base);
+  border-color: var(--color-ink);
 }
 
-.btn__bracket {
-  opacity: 0.55;
-}
-
-/* ── Marquee ──────────────────────────────────────────────── */
-.marquee {
-  display: flex;
-  overflow: hidden;
-  user-select: none;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    #000 8%,
-    #000 92%,
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    #000 8%,
-    #000 92%,
-    transparent
-  );
-}
-
-.marquee__track {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: space-around;
-  min-width: 100%;
-  animation: marquee var(--marquee-dur, 46s) linear infinite;
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-/* ── Row interactions (list sections) ─────────────────────── */
 .row {
-  transition: background-color 0.5s var(--ease);
+  transition: background-color 180ms ease;
 }
-.row:hover {
-  background-color: rgba(255, 255, 255, 0.025);
+
+.row:hover,
+.row:focus-within {
+  background-color: var(--color-surface);
 }
 
 .row__title {
-  transition:
-    color 0.45s var(--ease),
-    transform 0.45s var(--ease);
+  transition: color 180ms ease;
 }
+
 .row:hover .row__title {
-  color: #fff;
-  transform: translateX(10px);
+  color: var(--color-accent);
 }
 
-@media (max-width: 809px) {
-  .row:hover .row__title {
-    transform: none;
-  }
+.split-trigger {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
-/* ── Vertical stacked word ────────────────────────────────── */
-.stackword {
-  display: flex;
-  flex-direction: column;
-  line-height: 0.86;
-  letter-spacing: -0.04em;
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: var(--gutter);
+  z-index: 70;
+  padding: 12px 20px;
+  background: var(--color-accent);
+  color: var(--color-base);
+  transform: translateY(-160%);
 }
 
-/* ── Media ────────────────────────────────────────────────── */
-.filmic {
-  filter: grayscale(1) contrast(1.05);
-  transition: filter 0.6s var(--ease);
-}
-.filmic:hover {
-  filter: grayscale(0) contrast(1);
+.skip-link:focus-visible {
+  transform: translateY(0);
 }
 
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-  background-size: 180px;
+#main-content :is(.grid, .flex) > * {
+  min-width: 0;
+}
+
+#main-content :is(p, h1, h2, h3, dd, a, span) {
+  overflow-wrap: anywhere;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .marquee__track {
-    animation: none;
-  }
-  .split__stack,
-  .row__title,
-  .filmic {
-    transition: none;
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
   }
 }

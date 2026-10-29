@@ -4,7 +4,7 @@ export const awards: AwardItem[] = [
   {
     medal: 'gold',
     title: { en: 'Gold Medal', id: 'Medali Emas' },
-    event: 'Software Development Division – Gemastik XVIII',
+    event: 'Software Development Division, Gemastik XVIII',
     year: 2025,
     image: '/portfolio/images/awards/sertif_gemas.jpg',
   },
@@ -17,13 +17,13 @@ export const awards: AwardItem[] = [
   {
     medal: 'special',
     title: { en: 'Top 50', id: 'Top 50' },
-    event: 'Social Project Program – Innovillage',
+    event: 'Social Project Program, Innovillage',
     year: 2025,
   },
   {
     medal: 'bronze',
     title: { en: 'Bronze Medal', id: 'Medali Perunggu' },
-    event: 'Youth Scientific Work – WISPO (World Innovative Science Project Olympiad)',
+    event: 'Youth Scientific Work, WISPO (World Innovative Science Project Olympiad)',
     year: 2023,
   },
 ]

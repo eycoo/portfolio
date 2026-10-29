@@ -1,7 +1,5 @@
 import { useTranslation } from 'react-i18next'
 import SectionHeader from '../components/ui/SectionHeader'
-import Reveal from '../components/ui/Reveal'
-import { motion, useReducedMotion } from 'framer-motion'
 
 const CHANNELS = [
   {
@@ -28,7 +26,6 @@ const CHANNELS = [
 
 export default function Contact() {
   const { t } = useTranslation()
-  const reduced = useReducedMotion()
   const lines = t('contact.lines', { returnObjects: true }) as string[]
 
   return (
@@ -36,28 +33,18 @@ export default function Contact() {
       <div className="shell">
         <SectionHeader
           eyebrow={t('contact.eyebrow')}
-          code="(ANF® — 08)"
           tag={t('contact.tag')}
         />
 
         <h2 className="t-h1 max-w-[16ch] pt-10 text-ink lg:pt-16">
-          {lines.map((line, i) => (
-            <motion.span
-              key={line}
-              className="block"
-              initial={reduced ? { opacity: 0 } : { opacity: 0, y: '0.2em' }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.9, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-            >
+          {lines.map((line) => (
+            <span key={line} className="block">
               {line}
-            </motion.span>
+            </span>
           ))}
         </h2>
 
-        <Reveal delay={0.1}>
           <p className="t-lead mt-8 max-w-[470px] text-ink-2">{t('contact.subtitle')}</p>
-        </Reveal>
 
         <ul className="mt-14 border-b border-line lg:mt-20">
           {CHANNELS.map((channel, i) => (
@@ -74,15 +61,17 @@ export default function Contact() {
                   </span>
                 </div>
 
-                <div className="lg:col-span-5">
-                  <h3 className="t-h3 row__title text-ink-2">
+                <div className="min-w-0 lg:col-span-5">
+                  <h3 className="t-h3 row__title break-words text-ink-2">
                     {t('contact.' + channel.key + '_btn')}
                   </h3>
                 </div>
 
-                <div className="lg:col-span-6 lg:text-right">
-                  <span className="t-sm text-ink-3">{channel.value}</span>
-                  <span className="t-sm ml-4 text-ink-3">&#8599;</span>
+                <div className="min-w-0 lg:col-span-6 lg:text-right">
+                  <span className="t-sm break-words text-ink-3">{channel.value}</span>
+                  {channel.href.startsWith('https://') && (
+                    <span aria-hidden="true" className="t-sm ml-4 text-ink-3">&#8599;</span>
+                  )}
                 </div>
               </a>
             </li>

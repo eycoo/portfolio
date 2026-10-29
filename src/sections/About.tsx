@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import SectionHeader from '../components/ui/SectionHeader'
-import BracketButton from '../components/ui/BracketButton'
-import Reveal from '../components/ui/Reveal'
+import ActionLink from '../components/ui/ActionLink'
 
 export default function About() {
   const { t } = useTranslation()
@@ -15,35 +14,27 @@ export default function About() {
     { label: t('about.phone_label'), value: '+62 813-3138-3599' },
   ]
 
-  function goTo(id: string) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
     <section id="about" className="section">
       <div className="shell">
         <SectionHeader
           eyebrow={t('about.eyebrow')}
-          code="(ANF® — 05)"
           tag={t('about.tag')}
         />
 
         <div className="grid grid-cols-1 gap-10 py-10 lg:grid-cols-12 lg:gap-8 lg:py-16">
           <div className="lg:col-span-5">
-            <Reveal>
-              <div className="grain relative overflow-hidden rounded-brand">
+              <div className="relative overflow-hidden rounded-brand">
                 <img
                   src="/portfolio/images/profile/farras.jpg"
                   alt="Ahmad Naufal Farras"
                   loading="lazy"
-                  className="filmic aspect-[4/5] w-full max-w-[470px] object-cover"
+                  className="aspect-[4/5] w-full max-w-[470px] object-cover"
                 />
               </div>
-            </Reveal>
           </div>
 
-          <div className="lg:col-span-7">
-            <Reveal delay={0.08}>
+          <div className="min-w-0 lg:col-span-7">
               <p className="t-h3 max-w-[870px] text-ink">{t('about.body')}</p>
 
               <dl className="mt-12 border-b border-line">
@@ -53,17 +44,17 @@ export default function About() {
                     className="hair grid grid-cols-1 gap-1 py-4 md:grid-cols-12 md:gap-6"
                   >
                     <dt className="t-label text-ink-3 md:col-span-4">{detail.label}</dt>
-                    <dd className="t-sm m-0 text-ink-2 md:col-span-8">{detail.value}</dd>
+                    <dd className="t-sm m-0 min-w-0 break-words text-ink-2 md:col-span-8">{detail.value}</dd>
                   </div>
                 ))}
               </dl>
 
               <div className="mt-10 flex flex-wrap gap-3">
-                <BracketButton
+                <ActionLink
                   label={t('about.cta_works')}
-                  onClick={() => goTo('projects')}
+                  href="#projects"
                 />
-                <BracketButton
+                <ActionLink
                   label={t('hero.cta_cv')}
                   variant="ghost"
                   href="/portfolio/cv/CV_Ahmad_Naufal_Farras_5054241038-2.pdf"
@@ -71,7 +62,6 @@ export default function About() {
                   rel="noreferrer"
                 />
               </div>
-            </Reveal>
           </div>
         </div>
       </div>

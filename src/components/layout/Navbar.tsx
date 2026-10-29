@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AnimatePresence, motion } from 'framer-motion'
-import SplitText from '../ui/SplitText'
 
 const LINKS = ['projects', 'skills', 'about', 'experience', 'awards', 'contact'] as const
 
@@ -10,6 +9,28 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState<string>('')
 
+  const menuButton = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1024px)')
+    const closeOnDesktop = () => {
+      if (desktop.matches) setOpen(false)
+    }
+    desktop.addEventListener('change', closeOnDesktop)
+    return () => desktop.removeEventListener('change', closeOnDesktop)
+  }, [])
+
+  useEffect(() => {
+    if (!open) return
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false)
+        menuButton.current?.focus()
+      }
+    }
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [open])
   useEffect(() => {
     const sections = LINKS.map((id) => document.getElementById(id)).filter(
       (el): el is HTMLElement => el !== null,
@@ -30,46 +51,36 @@ export default function Navbar() {
     return () => observer.disconnect()
   }, [])
 
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [open])
-
-  function goTo(id: string) {
-    setOpen(false)
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   function toggleLang() {
     i18n.changeLanguage(i18n.language === 'en' ? 'id' : 'en')
   }
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <nav className="hair-b bg-base/80 backdrop-blur-xl">
+      <a href="#main-content" className="skip-link">
+        {i18n.language === 'id' ? 'Lewati ke konten' : 'Skip to content'}
+      </a>
+      <nav className="hair-b bg-base">
         <div className="shell flex h-16 items-center justify-between gap-6">
-          <button
-            type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          <a
+            href="#top"
             className="split-trigger t-micro cursor-pointer text-ink"
           >
-            <SplitText text="Farras®" />
-          </button>
+            Farras
+          </a>
 
-          <ul className="hidden items-center gap-8 lg:flex">
+          <ul className="hidden items-center gap-6 lg:flex">
             {LINKS.map((id) => (
               <li key={id}>
-                <button
-                  type="button"
-                  onClick={() => goTo(id)}
+                <a
+                  href={`#${id}`}
+                  aria-current={active === id ? 'location' : undefined}
                   className={`split-trigger t-label cursor-pointer transition-colors duration-500 ${
                     active === id ? 'text-ink' : 'text-ink-3 hover:text-ink'
                   }`}
                 >
-                  <SplitText text={t(`nav.${id}`)} />
-                </button>
+                  {t(`nav.${id}`)}
+                </a>
               </li>
             ))}
           </ul>
@@ -78,16 +89,18 @@ export default function Navbar() {
             <button
               type="button"
               onClick={toggleLang}
-              aria-label="Toggle language"
-              className="t-label cursor-pointer text-ink-3 transition-colors duration-500 hover:text-ink"
+              aria-label={i18n.language === 'id' ? 'Switch to English' : 'Ganti ke bahasa Indonesia'}
+              className="t-label min-w-12 cursor-pointer text-ink-2 transition-colors hover:text-ink"
             >
-              {i18n.language === 'en' ? 'EN / id' : 'en / ID'}
+              {i18n.language === 'en' ? 'ID' : 'EN'}
             </button>
 
             <button
               type="button"
+              ref={menuButton}
               onClick={() => setOpen((o) => !o)}
-              aria-label="Toggle menu"
+              aria-label={open ? t('nav.close') : t('nav.menu')}
+              aria-controls="mobile-navigation"
               aria-expanded={open}
               className="t-label cursor-pointer text-ink lg:hidden"
             >
@@ -100,25 +113,26 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-navigation"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="hair-b overflow-hidden bg-base lg:hidden"
           >
-            <ul className="shell py-2">
+            <ul className="shell max-h-[calc(100dvh-4rem)] overflow-y-auto py-2">
               {LINKS.map((id, i) => (
                 <li key={id} className={i === 0 ? '' : 'hair'}>
-                  <button
-                    type="button"
-                    onClick={() => goTo(id)}
+                  <a
+                    href={`#${id}`}
+                    onClick={() => setOpen(false)}
                     className="flex w-full cursor-pointer items-baseline justify-between py-4 text-left"
                   >
                     <span className="t-h3 text-ink">{t(`nav.${id}`)}</span>
                     <span className="t-label text-ink-3">
                       ({String(i + 1).padStart(2, '0')})
                     </span>
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>

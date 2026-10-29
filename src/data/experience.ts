@@ -101,8 +101,8 @@ export const experiences: ExperienceItem[] = [
         id: 'Memelihara integrasi REST API untuk panggilan inferensi LLM, menangani komunikasi antara layanan backend dan penyedia model eksternal.',
       },
       {
-        en: 'Monitored API response handling, error management, and request latency to keep LLM powered features running reliably.',
-        id: 'Memantau penanganan respons API, manajemen error, dan latensi request untuk menjaga fitur berbasis LLM berjalan dengan andal.',
+        en: 'Monitored API response handling, errors, and request latency for LLM inference.',
+        id: 'Memantau penanganan respons API, error, dan latensi request untuk inferensi LLM.',
       },
     ],
   },
@@ -118,8 +118,8 @@ export const experiences: ExperienceItem[] = [
         id: 'Mengelola pengumpulan, validasi, dan integritas database peserta untuk acara skala universitas.',
       },
       {
-        en: 'Organized data workflows using spreadsheets to support efficient information retrieval.',
-        id: 'Mengorganisir alur kerja data menggunakan spreadsheet untuk mendukung pengambilan informasi yang efisien.',
+        en: 'Organized participant data in spreadsheets for information retrieval.',
+        id: 'Mengatur data peserta dalam spreadsheet untuk pencarian informasi.',
       },
     ],
   },
@@ -135,8 +135,8 @@ export const experiences: ExperienceItem[] = [
         id: 'Mengelola pengumpulan, validasi, dan integritas database peserta untuk acara skala universitas.',
       },
       {
-        en: 'Organized data workflows using spreadsheets to support efficient information retrieval.',
-        id: 'Mengorganisir alur kerja data menggunakan spreadsheet untuk mendukung pengambilan informasi yang efisien.',
+        en: 'Organized participant data in spreadsheets for information retrieval.',
+        id: 'Mengatur data peserta dalam spreadsheet untuk pencarian informasi.',
       },
     ],
   },

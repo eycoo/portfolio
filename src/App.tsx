@@ -12,7 +12,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-base">
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero />
         <Projects />
         <Skills />

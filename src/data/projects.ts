@@ -6,7 +6,7 @@ export const projects: ProjectItem[] = [
     title: 'TB Cough Detection System',
     year: 2025,
     tags: ['Deep Learning', 'LSTM', 'Audio Processing', 'Python'],
-    award: '🥇 Gold Medal Gemastik XVIII',
+    award: 'Gold Medal Gemastik XVIII',
     bullets: [
       {
         en: 'Gold Medal, Software Development Division at Gemastik XVIII. Built an audio based diagnosis system to detect Tuberculosis from cough recordings.',
@@ -17,8 +17,8 @@ export const projects: ProjectItem[] = [
         id: 'Mengekstrak fitur menggunakan MFCC dan deskriptor spektral untuk menangkap pola dalam audio pernapasan.',
       },
       {
-        en: 'Trained an LSTM network on sequential audio data, with results showing good sensitivity in separating TB coughs from healthy subjects.',
-        id: 'Melatih jaringan LSTM pada data audio sekuensial, dengan hasil menunjukkan sensitivitas yang baik dalam memisahkan batuk TB dari subjek sehat.',
+        en: 'Trained an LSTM network on sequential audio data to distinguish TB coughs from healthy subjects.',
+        id: 'Melatih jaringan LSTM pada data audio sekuensial untuk membedakan batuk TB dari subjek sehat.',
       },
     ],
     image: '/portfolio/images/projects/tb-cough.jpg',
@@ -97,8 +97,8 @@ export const projects: ProjectItem[] = [
         id: 'Melakukan fine tuning model dengan Low Rank Adaptation (LoRA) untuk menghasilkan gambar yang mempertahankan fitur wajah etnis yang khas.',
       },
       {
-        en: 'Showed that adding synthetic data to the training set improved accuracy of external classifiers (XGBoost/ViT), supporting the use of synthetic data in low resource settings.',
-        id: 'Menunjukkan bahwa penambahan data sintetis ke training set meningkatkan akurasi classifier eksternal (XGBoost/ViT), mendukung penggunaan data sintetis dalam setting low resource.',
+        en: 'Adding synthetic data to the training set improved the accuracy of external classifiers (XGBoost/ViT).',
+        id: 'Penambahan data sintetis ke training set meningkatkan akurasi classifier eksternal (XGBoost/ViT).',
       },
     ],
     image: '/portfolio/images/projects/synthetic-data.jpg',

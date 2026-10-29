@@ -1,11 +1,11 @@
 {
   "meta": {
-    "based": "Berbasis di Surabaya 泗水",
+    "based": "Berbasis di Surabaya",
     "role": "AI Engineer + Peneliti Deep Learning"
   },
   "nav": {
     "projects": "Proyek",
-    "skills": "Kapabilitas",
+    "skills": "Keahlian",
     "about": "Profil",
     "experience": "Pengalaman",
     "awards": "Penghargaan",
@@ -16,114 +16,86 @@
     "close": "Tutup"
   },
   "hero": {
-    "lines": [
-      "Sistem Cerdas",
-      "yang Belajar",
-      "dan Memberi",
-      "Dampak インパクト."
-    ],
-    "marquee": [
-      "Computer Vision",
-      "Audio Intelligence",
-      "Deep Learning",
-      "Model Generatif",
-      "NLP & RAG",
-      "Neuromorphic"
-    ],
-    "eyebrow": "© Applied Deep Learning リサーチ",
-    "tag": "AI Engineer",
     "roles": [
       "Computer Vision",
-      "Audio Intelligence",
+      "Pemrosesan Audio",
       "Model Generatif",
       "Riset Neuromorphic"
     ],
-    "subtitle": "Mahasiswa Teknik Kecerdasan Artifisial di ITS Surabaya. Peraih Medali Emas Gemastik XVIII, membangun sistem yang membawa riset sampai ke tahap produksi.",
-    "cta_contact": "Kontak",
+    "subtitle": "Saya mahasiswa Teknik Kecerdasan Artifisial di ITS Surabaya. Saya mengerjakan pemrosesan audio, computer vision, dan model generatif, serta meraih Medali Emas Gemastik XVIII.",
+    "cta_contact": "Hubungi Saya",
     "cta_cv": "Unduh CV"
   },
   "projects": {
-    "eyebrow": "© Featured Projects プロジェクト",
+    "eyebrow": "Proyek Pilihan",
     "tag": "Riset Terapan",
-    "heading": "Karya Pilihan©",
-    "body": "Setiap proyek membawa model dari makalah menjadi sesuatu yang benar-benar berjalan — diagnosis audio, pencitraan medis, pipeline generatif, dan sistem visi yang dibangun dengan tujuan, kecepatan, dan hasil terukur.",
+    "heading": "Proyek",
+    "body": "Saya mengerjakan deteksi batuk TB, klasifikasi citra medis, data sintetis, dan pemrosesan audio. Berikut metode, hasil eksperimen, dan repositori yang tersedia.",
     "filter_all": "Semua",
     "detail": "Detail",
     "close": "Tutup",
     "view_github": "GitHub",
     "view_demo": "Demo",
     "view_paper": "Paper",
-    "no_link": "Tautan segera hadir"
+    "no_link": "Tautan tidak tersedia"
   },
   "skills": {
-    "eyebrow": "© Capabilities スキル",
-    "tag": "Stack Teknis",
-    "heading": "Kapabilitas",
-    "traits": [
-      "Presisi",
-      "Terstruktur",
-      "Terapan"
-    ],
-    "body": "Stack di balik seluruh pekerjaan — bahasa, framework, dan spesialisasi yang dipakai lintas riset dan produksi."
+    "eyebrow": "Keahlian Teknis",
+    "tag": "Perangkat Kerja",
+    "heading": "Keahlian",
+    "body": "Bahasa pemrograman, library, dan alat yang saya gunakan dalam proyek dan riset AI."
   },
   "about": {
-    "eyebrow": "© Personal Profile プロフィール",
-    "tag": "Engineer & Peneliti",
-    "body": "Mahasiswa Teknik Kecerdasan Artifisial di ITS dengan fokus pada applied deep learning. Peraih Medali Emas Gemastik XVIII dan Juara 1 BRIN AIDeaNation, dengan spesialisasi audio dan image processing — dari deployment model bio-akustik untuk kesehatan hingga riset synthetic data dengan Stable Diffusion.",
+    "eyebrow": "Profil Saya",
+    "tag": "Pendidikan & Fokus Riset",
+    "body": "Saya belajar Teknik Kecerdasan Artifisial di ITS dengan fokus pada deep learning terapan untuk audio dan citra. Saya mengembangkan model bio-akustik untuk kesehatan dan meneliti data sintetis dengan Stable Diffusion. Saya meraih Medali Emas Gemastik XVIII dan Juara 1 BRIN AIDeaNation.",
     "education_label": "Pendidikan",
     "education": "Institut Teknologi Sepuluh Nopember",
     "degree_label": "Gelar",
     "degree": "Sarjana Teknik Kecerdasan Artifisial",
     "period_label": "Periode",
-    "period": "Jul 2024 — Sekarang · IPK 3.4 / 4.0",
+    "period": "Jul 2024 sampai sekarang · IPK 3.4 / 4.0",
     "location_label": "Lokasi",
     "location": "Surabaya, Indonesia",
     "email_label": "Email",
     "phone_label": "Telepon",
-    "cta_works": "Lihat Karya"
+    "cta_works": "Lihat Proyek"
   },
   "experience": {
-    "eyebrow": "© Experience エクスペリエンス",
-    "tag": "Praktik Terapan",
-    "word": "Praktik.",
+    "eyebrow": "Pengalaman Kerja",
+    "tag": "Riset & Engineering",
+    "word": "Pengalaman",
     "count": "({{n}}) Posisi",
     "current": "Aktif",
-    "hint": "Pilih salah satu peran untuk membaca detailnya"
+    "hint": "Pilih peran untuk membaca tanggung jawabnya"
   },
   "awards": {
-    "eyebrow": "© Awards アワード",
-    "tag": "Penghargaan Pilihan",
+    "eyebrow": "Kompetisi & Penghargaan",
+    "tag": "Hasil Kompetisi",
     "heading": "Penghargaan",
-    "body": "Pengakuan nasional dan internasional untuk karya AI terapan di bidang kesehatan, dampak sosial, dan riset ilmiah.",
+    "body": "Penghargaan yang saya terima dalam kompetisi pengembangan perangkat lunak, AI, proyek sosial, dan karya ilmiah.",
     "view_cert": "Lihat Sertifikat",
     "close": "Tutup",
     "cert_alt": "Sertifikat penghargaan"
   },
   "contact": {
-    "eyebrow": "© Get In Touch コンタクト",
-    "tag": "Terbuka Untuk Kerja",
+    "eyebrow": "Hubungi Saya",
+    "tag": "Terbuka untuk Kerja Sama",
     "lines": [
-      "Mari Bangun",
-      "Sesuatu yang Nyata",
-      "一緒に."
+      "Diskusi Riset",
+      "& Pekerjaan AI"
     ],
-    "subtitle": "Terbuka untuk kolaborasi riset, peran AI engineering, dan kerja sama freelance.",
+    "subtitle": "Hubungi saya untuk kolaborasi riset, posisi AI engineer, atau proyek freelance.",
     "email_btn": "Kirim Email",
     "linkedin_btn": "LinkedIn",
     "github_btn": "GitHub",
     "wa_btn": "WhatsApp"
   },
   "footer": {
-    "eyebrow": "© Final Section クロージング",
-    "tag": "Penutup",
-    "traits": [
-      "Independen",
-      "Terapan",
-      "Multidisiplin",
-      "Berbasis Riset"
-    ],
-    "statement": "Saya membangun sistem AI yang tetap bekerja di luar notebook — dari diagnosis bio-akustik hingga pipeline data generatif dan visi neuromorphic.",
-    "top": "Kembali Ke Atas",
+    "eyebrow": "Ahmad Naufal Farras",
+    "tag": "Surabaya, Indonesia",
+    "statement": "Saya Ahmad Naufal Farras, mahasiswa Teknik Kecerdasan Artifisial di ITS. Portofolio ini memuat proyek, riset, dan pengalaman kerja saya di bidang AI.",
+    "top": "Kembali ke Atas",
     "built": "Dibangun dengan React, Vite & Framer Motion"
   }
 }

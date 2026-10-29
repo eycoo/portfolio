@@ -1,11 +1,11 @@
 {
   "meta": {
-    "based": "Based in Surabaya 泗水",
+    "based": "Based in Surabaya",
     "role": "AI Engineer + Deep Learning Researcher"
   },
   "nav": {
     "projects": "Projects",
-    "skills": "Capabilities",
+    "skills": "Skills",
     "about": "Profile",
     "experience": "Experience",
     "awards": "Awards",
@@ -16,114 +16,86 @@
     "close": "Close"
   },
   "hero": {
-    "lines": [
-      "Systems that",
-      "Learn, Reason,",
-      "and Deliver Real",
-      "World インパクト."
-    ],
-    "marquee": [
-      "Computer Vision",
-      "Audio Intelligence",
-      "Deep Learning",
-      "Generative Models",
-      "NLP & RAG",
-      "Neuromorphic"
-    ],
-    "eyebrow": "© Applied Deep Learning リサーチ",
-    "tag": "AI Engineer",
     "roles": [
       "Computer Vision",
-      "Audio Intelligence",
+      "Audio Processing",
       "Generative Models",
       "Neuromorphic Research"
     ],
-    "subtitle": "Artificial Intelligence Engineering student at ITS Surabaya. Gold Medalist at Gemastik XVIII, building systems that carry research all the way into production.",
-    "cta_contact": "Contact",
+    "subtitle": "I'm an Artificial Intelligence Engineering student at ITS Surabaya. I work on audio processing, computer vision, and generative models, and received a Gold Medal at Gemastik XVIII.",
+    "cta_contact": "Contact Me",
     "cta_cv": "Download CV"
   },
   "projects": {
-    "eyebrow": "© Featured Projects プロジェクト",
+    "eyebrow": "Selected Projects",
     "tag": "Applied Research",
-    "heading": "Selected Works©",
-    "body": "Every project moves a model from paper to something that actually runs — audio diagnostics, medical imaging, generative pipelines, and vision systems built with intent, speed, and measurable results.",
+    "heading": "Projects",
+    "body": "I work on TB cough detection, medical image classification, synthetic data, and audio processing. Here are the methods, experimental results, and available repositories.",
     "filter_all": "All",
-    "detail": "Detail",
+    "detail": "Details",
     "close": "Close",
     "view_github": "GitHub",
     "view_demo": "Demo",
     "view_paper": "Paper",
-    "no_link": "Links coming soon"
+    "no_link": "Links unavailable"
   },
   "skills": {
-    "eyebrow": "© Capabilities スキル",
-    "tag": "Technical Stack",
-    "heading": "Capabilities",
-    "traits": [
-      "Precise",
-      "Structured",
-      "Applied"
-    ],
-    "body": "The stack behind the work — languages, frameworks, and specializations used across research and production."
+    "eyebrow": "Technical Skills",
+    "tag": "Tools I Use",
+    "heading": "Skills",
+    "body": "Programming languages, libraries, and tools I use in AI projects and research."
   },
   "about": {
-    "eyebrow": "© Personal Profile プロフィール",
-    "tag": "Engineer & Researcher",
-    "body": "Artificial Intelligence Engineering student at ITS focused on applied deep learning. Gold Medalist at Gemastik XVIII and 1st Place at BRIN AIDeaNation, specializing in audio and image processing — from deploying bio-acoustic models for healthcare to researching synthetic data with Stable Diffusion.",
+    "eyebrow": "About Me",
+    "tag": "Education & Research Focus",
+    "body": "I study Artificial Intelligence Engineering at ITS, focusing on applied deep learning for audio and images. I develop bio-acoustic models for healthcare and research synthetic data with Stable Diffusion. I received a Gold Medal at Gemastik XVIII and 1st Place at BRIN AIDeaNation.",
     "education_label": "Education",
     "education": "Institut Teknologi Sepuluh Nopember",
     "degree_label": "Degree",
     "degree": "Bachelor of Science in Artificial Intelligence Engineering",
     "period_label": "Period",
-    "period": "Jul 2024 — Present · GPA 3.4 / 4.0",
+    "period": "Jul 2024 to present · GPA 3.4 / 4.0",
     "location_label": "Location",
     "location": "Surabaya, Indonesia",
     "email_label": "Email",
     "phone_label": "Phone",
-    "cta_works": "See Works"
+    "cta_works": "View Projects"
   },
   "experience": {
-    "eyebrow": "© Experience エクスペリエンス",
-    "tag": "Applied Practice",
-    "word": "Practice.",
+    "eyebrow": "Work Experience",
+    "tag": "Research & Engineering",
+    "word": "Experience",
     "count": "({{n}}) Positions",
-    "current": "Now",
-    "hint": "Select a role to read the detail"
+    "current": "Current",
+    "hint": "Select a role to read its responsibilities"
   },
   "awards": {
-    "eyebrow": "© Awards アワード",
-    "tag": "Selected Honors",
+    "eyebrow": "Competitions & Awards",
+    "tag": "Competition Results",
     "heading": "Awards",
-    "body": "National and international recognition for applied AI work across healthcare, social impact, and scientific research.",
+    "body": "Awards I received in software development, AI, social project, and scientific work competitions.",
     "view_cert": "View Certificate",
     "close": "Close",
     "cert_alt": "Award certificate"
   },
   "contact": {
-    "eyebrow": "© Get In Touch コンタクト",
-    "tag": "Open For Work",
+    "eyebrow": "Contact Me",
+    "tag": "Open to Collaboration",
     "lines": [
-      "Let's Build",
-      "Something Real",
-      "一緒に."
+      "Let's Discuss",
+      "AI Research & Work"
     ],
-    "subtitle": "Open to research collaborations, AI engineering roles, and freelance engagements.",
+    "subtitle": "Contact me about research collaborations, AI engineering roles, or freelance projects.",
     "email_btn": "Send Email",
     "linkedin_btn": "LinkedIn",
     "github_btn": "GitHub",
     "wa_btn": "WhatsApp"
   },
   "footer": {
-    "eyebrow": "© Final Section クロージング",
-    "tag": "Closing",
-    "traits": [
-      "Independent",
-      "Applied",
-      "Multidisciplinary",
-      "Research-Led"
-    ],
-    "statement": "I build AI systems that hold up outside the notebook — from bio-acoustic diagnosis to generative data pipelines and neuromorphic vision.",
-    "top": "Back To Top",
+    "eyebrow": "Ahmad Naufal Farras",
+    "tag": "Surabaya, Indonesia",
+    "statement": "I'm Ahmad Naufal Farras, an Artificial Intelligence Engineering student at ITS. This portfolio covers my AI projects, research, and work experience.",
+    "top": "Back to Top",
     "built": "Built with React, Vite & Framer Motion"
   }
 }
